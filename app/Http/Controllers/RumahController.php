@@ -30,7 +30,6 @@ class RumahController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $validasi = Validator::make($request->all(), [
             'nama' => ['required'],
             'tipe' => ['required', 'numeric'],
@@ -74,13 +73,6 @@ class RumahController extends Controller
         }
     }
 
-    public function show(Rumah $rumah)
-    {
-        return view('admin.rumah.show', [
-            'rumah' => $rumah
-        ]);
-    }
-
     public function edit(Rumah $rumah)
     {
         return view('admin.rumah.edit', [
@@ -90,11 +82,61 @@ class RumahController extends Controller
 
     public function update(Request $request, Rumah $rumah)
     {
-        //
+        $validasi = Validator::make($request->all(), [
+            'nama' => ['required'],
+            'tipe' => ['required', 'numeric'],
+            'tanah' => ['required', 'numeric'],
+            'harga' => ['required', 'numeric'],
+            'detail' => ['required'],
+        ], [
+            'nama.required' => 'Nama atau lokasi rumah harus diisi!',
+            'tipe.required' => 'Tipe rumah harus diisi!',
+            'tipe.numeric' => 'Tipe rumah harus diisi dengan angka!',
+            'tanah.required' => 'Luas tanah rumah harus diisi!',
+            'tanah.numeric' => 'Luas tanah rumah harus diisi dengan angka!',
+            'harga.required' => 'Harga rumah harus diisi!',
+            'harga.numeric' => 'Harga rumah harus diisi dengan angka!',
+            'detail.required' => 'Detail rumah harus diisi!',
+        ]);
+
+        if ($validasi->fails()) {
+            return redirect(route('rumah.create'))
+                ->withErrors($validasi)
+                ->withInput();
+        } else {
+            $rumah->update([
+                'nama' => $request->nama,
+                'tipe_rumah' => $request->tipe . '/' . $request->tanah,
+                'harga' => $request->harga,
+                'detail' => $request->detail,
+            ]);
+            if ($rumah) {
+                return redirect(route('rumah.index'))->with([
+                    'color' => 'success',
+                    'message' => 'Data rumah berhasil diperbarui!',
+                ]);
+            } else {
+                return redirect(route('rumah.index'))->with([
+                    'color' => 'danger',
+                    'message' => 'Data rumah gagal diperbarui! Silakan memeriksa kembali koneksi internet anda!',
+                ]);
+            }
+        }
     }
 
     public function destroy(Rumah $rumah)
     {
-        //
+        $rumah->delete();
+        if ($rumah) {
+            return redirect(route('rumah.index'))->with([
+                'color' => 'success',
+                'message' => 'Data rumah berhasil dihapus!',
+            ]);
+        } else {
+            return redirect(route('rumah.index'))->with([
+                'color' => 'danger',
+                'message' => 'Data rumah gagal dihapus! Silakan memeriksa kembali koneksi internet anda!',
+            ]);
+        }
     }
 }

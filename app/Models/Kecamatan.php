@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Rumah extends Model
+class Kecamatan extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'nama',
-        'rumah_code',
-        'tipe_rumah',
-        'harga',
-        'detail',
-        'status',
+        'nama'
     ];
 
-    public function penilaian()
+    public function kelurahan()
     {
-        return $this->hasMany(Penilaian::class);
+        return $this->hasMany(Kelurahan::class);
     }
 }

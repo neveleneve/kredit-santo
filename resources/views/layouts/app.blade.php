@@ -15,6 +15,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
     </style>
+    @stack('custom-css')
     @livewireStyles
 </head>
 
@@ -81,6 +82,7 @@
         @csrf
     </form>
     <script src="{{ url('fontawesome/js/all.js') }}"></script>
+    @stack('custom-js')
     @livewireScripts
 </body>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\KriteriaBobotController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\RumahController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Auth::routes([
 
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::resource('nasabah', NasabahController::class);
-Route::resource('rumah', RumahController::class);
+Route::resource('rumah', RumahController::class)->except([
+    'show'
+]);
 Route::resource('penilaian', PenilaianController::class);
 Route::resource('kriteria-bobot', KriteriaBobotController::class);

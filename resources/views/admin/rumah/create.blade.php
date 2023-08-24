@@ -87,9 +87,9 @@
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label for="detail" class="label has-text-weight-bold">Detail Rumah</label>
+                                    <label for="detail" class="label has-text-weight-bold">Deskripsi Rumah</label>
                                     <div class="control">
-                                        <textarea name="detail" id="detail" cols="30" rows="10" placeholder="Detail Rumah"
+                                        <textarea name="detail" id="detail" cols="30" rows="10" placeholder="Deskripsi Rumah"
                                             class="textarea @error('detail') is-danger @enderror">{{ old('detail') }}</textarea>
                                         @error('detail')
                                             <span class="has-text-weight-bold has-text-danger">

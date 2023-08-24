@@ -5,13 +5,13 @@
                 <i class="fas fa-chevron-left"></i>
             </span>
         @else
-            <a href="#" class="pagination-previous" wire:click="setPage('{{ $paginator->previousPageUrl() }}')">
+            <a class="pagination-previous" wire:click="setPage('{{ $paginator->previousPageUrl() }}')">
                 <i class="fas fa-chevron-left"></i>
             </a>
         @endif
 
         @if ($paginator->hasMorePages())
-            <a href="#" class="pagination-next" wire:click="setPage('{{ $paginator->nextPageUrl() }}')">
+            <a class="pagination-next" wire:click="setPage('{{ $paginator->nextPageUrl() }}')">
                 <i class="fas fa-chevron-right"></i>
             </a>
         @else
@@ -31,13 +31,13 @@
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
                             <li>
-                                <a class="pagination-link is-current">
+                                <span class="pagination-link is-current">
                                     {{ $page }}
-                                </a>
+                                </span>
                             </li>
                         @else
                             <li>
-                                <a href="#" class="pagination-link" wire:click="setPage('{{ $url }}')">
+                                <a class="pagination-link" wire:click="setPage('{{ $url }}')">
                                     {{ $page }}
                                 </a>
                             </li>

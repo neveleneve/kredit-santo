@@ -4,7 +4,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-6-dekstop is-12-mobile">
+                <div class="column is-6-desktop is-12-mobile">
                     <div class="card has-background-primary">
                         <div class="card-content">
                             <div class="media">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-6-dekstop is-12-mobile">
+                <div class="column is-6-desktop is-12-mobile">
                     <div class="card has-background-info">
                         <div class="card-content">
                             <div class="media">

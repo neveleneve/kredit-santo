@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIstrisTable extends Migration
+class CreateKecamatansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateIstrisTable extends Migration
      */
     public function up()
     {
-        Schema::create('istris', function (Blueprint $table) {
+        Schema::create('kecamatans', function (Blueprint $table) {
             $table->id();
-            $table->integer('nasabah_id');
-            $table->string('nama')->nullable();
-            $table->string('kontak')->nullable();
-            $table->string('nik')->nullable();
-            $table->enum('pekerjaan', [1, 2, 3])->nullable();
+            $table->string('nama');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateIstrisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('istris');
+        Schema::dropIfExists('kecamatans');
     }
 }

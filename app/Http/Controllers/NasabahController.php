@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class NasabahController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $nasabah = Nasabah::get();
@@ -17,13 +22,13 @@ class NasabahController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.nasabah.create');
     }
 
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
 
