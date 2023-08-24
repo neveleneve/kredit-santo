@@ -14,7 +14,7 @@ class Istri extends Model
         'nama',
         'nik',
         'pekerjaan',
-        'gaji',
+        'kontak',
     ];
 
     public function nasabah()

@@ -15,8 +15,11 @@ class CreatePenjaminsTable extends Migration
     {
         Schema::create('penjamins', function (Blueprint $table) {
             $table->id();
+            $table->integer('nasabah_id');
+            $table->enum('tipe_penjamin', ['ayah', 'ibu', 'saudara', 'lainnya']);
             $table->string('nama');
             $table->string('kontak');
+            $table->string('alamat');
             $table->timestamps();
         });
     }
