@@ -19,7 +19,7 @@ class CreateIstrisTable extends Migration
             $table->string('nama')->nullable();
             $table->string('kontak')->nullable();
             $table->string('nik')->nullable();
-            $table->enum('pekerjaan', [1, 2, 3])->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->timestamps();
         });
     }

@@ -3,14 +3,14 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <div class="columns is-4-desktop is-12-mobile">
-                <div class="column is-4-desktop is-12-mobile">
-                    <button class="button is-primary is-fullwidth has-text-weight-bold">
+            <div class="columns my-0">
+                <div class="column my-0">
+                    <button class="button is-primary is-fullwidth has-text-weight-bold is-small">
                         Tambah Data Rumah
                     </button>
                 </div>
-                <div class="column is-4-desktop is-offset-4-desktop is-12-mobile">
-                    <input class="input is-default" type="text" placeholder="Pencarian">
+                <div class="column is-4-desktop is-offset-4-desktop is-12-mobile my-0">
+                    <input class="input is-default is-small" type="text" placeholder="Pencarian">
                 </div>
             </div>
             <div class="columns">

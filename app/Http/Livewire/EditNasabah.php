@@ -4,11 +4,15 @@ namespace App\Http\Livewire;
 
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Nasabah;
 use DateTime;
 use Livewire\Component;
 
-class AddNasabah extends Component
+class EditNasabah extends Component
 {
+    public $nasabah_id;
+    public $datanasabah;
+
     public $datakecamatan;
     public $kecamatan;
     public $datakelurahan;
@@ -25,17 +29,23 @@ class AddNasabah extends Component
         } else {
             $this->datakelurahan = Kelurahan::where('kecamatan_id', $this->kecamatan)->get();
         }
-        return view('livewire.add-nasabah');
+        return view('livewire.edit-nasabah');
     }
 
     public function mount()
     {
+        $this->datanasabah = Nasabah::with('detailNasabah', 'istri', 'penjamin')->find($this->nasabah_id);
+
+        $this->datakelurahan = Kelurahan::get();
         $this->datakecamatan = Kecamatan::get();
-        $this->statusnikah = old('kawin');
-        $this->kecamatan = old('kecamatan');
-        $this->kelurahan = old('kelurahan');
-        $this->tanggallahir = old('tanggal_lahir');
-        $this->usia = old('usia');
+
+        $this->kelurahan = $this->datanasabah->kelurahan_id;
+        $selectedkelurahan = Kelurahan::find($this->kelurahan);
+        $this->kecamatan = $selectedkelurahan->kecamatan_id;
+
+        $this->tanggallahir = $this->datanasabah->detailNasabah->tanggal_lahir;
+        $this->statusnikah = $this->datanasabah->detailNasabah->status_pernikahan;
+        $this->usiaCount();
     }
 
     public function usiaCount()

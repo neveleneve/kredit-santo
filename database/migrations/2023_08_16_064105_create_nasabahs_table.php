@@ -18,6 +18,7 @@ class CreateNasabahsTable extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('kelurahan_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

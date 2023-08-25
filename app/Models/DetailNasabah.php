@@ -13,10 +13,12 @@ class DetailNasabah extends Model
         'nasabah_id',
         'nik',
         'no_kk',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'kontak',
         'jenis_kelamin',
         'pekerjaan',
         'gaji',
-        'pengeluaran',
         'tanggungan',
     ];
 

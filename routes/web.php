@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KriteriaBobotController;
 use App\Http\Controllers\NasabahController;
@@ -28,9 +29,17 @@ Auth::routes([
 ]);
 
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-Route::resource('nasabah', NasabahController::class);
+// Route::get('test', [Controller::class, 'test'])->name('test');
+Route::resource('nasabah', NasabahController::class)->except([
+    'show'
+]);
 Route::resource('rumah', RumahController::class)->except([
     'show'
 ]);
 Route::resource('penilaian', PenilaianController::class);
-Route::resource('kriteria-bobot', KriteriaBobotController::class);
+Route::resource('kriteria-bobot', KriteriaBobotController::class)->except([
+    'show',
+    'create',
+    'store',
+    'destroy',
+]);

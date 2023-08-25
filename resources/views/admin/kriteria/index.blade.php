@@ -3,16 +3,6 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <div class="columns is-4-desktop is-12-mobile">
-                <div class="column is-4-desktop is-12-mobile">
-                    <button class="button is-primary is-fullwidth has-text-weight-bold">
-                        Tambah Data Kriteria
-                    </button>
-                </div>
-                <div class="column is-4-desktop is-offset-4-desktop is-12-mobile">
-                    <input class="input is-default" type="text" placeholder="Pencarian">
-                </div>
-            </div>
             <div class="columns">
                 <div class="column">
                     @if (session()->has('message'))
@@ -31,19 +21,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($kriteriaBobot as $item)
+                            @forelse ($kriteria as $item)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->nama }}</td>
                                     <td>{{ $item->bobot }}</td>
                                     <td>{{ $item->tipe }}</td>
                                     <td class="has-text-centered">
                                         <a class="button is-primary is-small has-text-weight-bold"
-                                            href="{{ route('nasabah.edit', ['nasabah' => $item->id]) }}">
-                                            Edit
-                                        </a>
-                                        <a class="button is-danger is-small has-text-weight-bold">
-                                            Hapus
+                                            href="{{ route('kriteria-bobot.edit', ['kriteria_bobot' => $item->id]) }}">
+                                            Lihat
                                         </a>
                                     </td>
                                 </tr>

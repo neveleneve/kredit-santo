@@ -5,7 +5,7 @@
                 <label class="label" for="nama">Nama Nasabah <span class="has-text-danger">*</span></label>
                 <div class="control @error('nama') has-icons-left @enderror">
                     <input class="input @error('nama') is-danger @enderror" type="text" placeholder="Nama Nasabah"
-                        id="nama" name="nama" value="{{ old('nama') }}">
+                        id="nama" name="nama" value="{{ $datanasabah->nama }}">
                     @error('nama')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -24,10 +24,12 @@
                     <div class="select is-fullwidth @error('kelamin') is-danger @enderror">
                         <select id="kelamin" name="kelamin">
                             <option value="">Pilih Jenis Kelamin</option>
-                            <option value="laki-laki" {{ old('kelamin') == 'laki-laki' ? 'selected' : null }}>
+                            <option value="laki-laki"
+                                {{ $datanasabah->detailNasabah->jenis_kelamin == 'laki-laki' ? 'selected' : null }}>
                                 Laki-laki
                             </option>
-                            <option value="perempuan" {{ old('kelamin') == 'perempuan' ? 'selected' : null }}>
+                            <option value="perempuan"
+                                {{ $datanasabah->jenis_kelamin == 'perempuan' ? 'selected' : null }}>
                                 Perempuan
                             </option>
                         </select>
@@ -50,16 +52,16 @@
                     <div class="select is-fullwidth @error('kawin') is-danger @enderror">
                         <select id="kawin" name="kawin" wire:model='statusnikah'>
                             <option value="">Pilih Status Pernikahan</option>
-                            <option value="belum kawin" {{ old('kawin') == 'belum kawin' ? 'selected' : null }}>
+                            <option value="belum kawin">
                                 Belum Kawin
                             </option>
-                            <option value="kawin" {{ old('kawin') == 'kawin' ? 'selected' : null }}>
+                            <option value="kawin">
                                 Kawin
                             </option>
-                            <option value="cerai hidup" {{ old('kawin') == 'cerai hidup' ? 'selected' : null }}>
+                            <option value="cerai hidup">
                                 Cerai Hidup
                             </option>
-                            <option value="cerai mati" {{ old('kawin') == 'cerai mati' ? 'selected' : null }}>
+                            <option value="cerai mati">
                                 Cerai Mati
                             </option>
                         </select>
@@ -83,7 +85,7 @@
                 <label class="label" for="nik">Nomor NIK <span class="has-text-danger">*</span></label>
                 <div class="control @error('nik') has-icons-left @enderror">
                     <input class="input @error('nik') is-danger @enderror" type="text" placeholder="Nomor NIK"
-                        id="nik" name="nik" value="{{ old('nik') }}">
+                        id="nik" name="nik" value="{{ $datanasabah->detailNasabah->nik }}">
                     @error('nik')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -97,28 +99,10 @@
         </div>
         <div class="column">
             <div class="field">
-                <label class="label" for="ktp">Gambar Kartu Tanda Penduduk <span
-                        class="has-text-danger">*</span></label>
+                <label class="label">Foto KTP</label>
                 <div class="control">
-                    <div class="file @error('ktp') is-danger @else is-primary @enderror">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="ktp" id="ktp"
-                                accept="image/png, image/jpeg">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                    Pilih file… (Maks. 1 MB)
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-                    @error('ktp')
-                        <span class="has-text-weight-bold has-text-danger">
-                            * {{ $message }}
-                        </span>
-                    @enderror
+                    <img src="{{ asset('storage/images/ktp/' . $datanasabah->id . '_KTP_' . $datanasabah->detailNasabah->nik . '.png') }}"
+                        alt="Uploaded Image">
                 </div>
             </div>
         </div>
@@ -127,7 +111,7 @@
                 <label class="label" for="no_kk">Nomor KK <span class="has-text-danger">*</span></label>
                 <div class="control @error('no_kk') has-icons-left @enderror">
                     <input class="input @error('no_kk') is-danger @enderror" type="text" placeholder="Nomor KK"
-                        id="no_kk" name="no_kk" value="{{ old('no_kk') }}">
+                        id="no_kk" name="no_kk" value="{{ $datanasabah->detailNasabah->no_kk }}">
                     @error('no_kk')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -141,28 +125,10 @@
         </div>
         <div class="column">
             <div class="field">
-                <label class="label" for="kk">Gambar Kartu Keluarga <span
-                        class="has-text-danger">*</span></label>
+                <label class="label">Foto KTP</label>
                 <div class="control">
-                    <div class="file @error('kk') is-danger @else is-primary @enderror">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="kk" id="kk"
-                                accept="image/png, image/jpeg">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                    Pilih file… (Maks. 1 MB)
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-                    @error('kk')
-                        <span class="has-text-weight-bold has-text-danger">
-                            * {{ $message }}
-                        </span>
-                    @enderror
+                    <img src="{{ asset('storage/images/kk/' . $datanasabah->id . '_KK_' . $datanasabah->detailNasabah->no_kk . '.png') }}"
+                        alt="Uploaded Image">
                 </div>
             </div>
         </div>
@@ -175,7 +141,7 @@
                 <div class="control @error('tempat_lahir') has-icons-left @enderror">
                     <input class="input @error('tempat_lahir') is-danger @enderror" type="text"
                         placeholder="Tempat Lahir" id="tempat_lahir" name="tempat_lahir"
-                        value="{{ old('tempat_lahir') }}">
+                        value="{{ $datanasabah->detailNasabah->tempat_lahir }}">
                     @error('tempat_lahir')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -228,7 +194,7 @@
                 <label class="label" for="kontak">Kontak <span class="has-text-danger">*</span></label>
                 <div class="control @error('kontak') has-icons-left @enderror">
                     <input class="input @error('kontak') is-danger @enderror" type="text" placeholder="Kontak"
-                        id="kontak" name="kontak" value="{{ old('kontak') }}">
+                        id="kontak" name="kontak" value="{{ $datanasabah->detailNasabah->kontak }}">
                     @error('kontak')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -251,7 +217,7 @@
                 <label class="label" for="alamat">Alamat <span class="has-text-danger">*</span></label>
                 <div class="control">
                     <textarea name="alamat" id="alamat" cols="30" rows="10"
-                        class="textarea @error('alamat') is-danger @enderror" placeholder="Alamat">{{ old('alamat') }}</textarea>
+                        class="textarea @error('alamat') is-danger @enderror" placeholder="Alamat">{{ $datanasabah->alamat }}</textarea>
                     @error('alamat')
                         <span class="has-text-weight-bold has-text-danger">
                             * {{ $message }}
@@ -268,13 +234,12 @@
                 <div class="control @error('kecamatan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('kecamatan') is-danger @enderror">
                         <select id="kecamatan" name="kecamatan" wire:model='kecamatan'>
-                            <option value=""
-                                {{ old('kecamatan') == '' || old('kecamatan') == null ? 'selected' : null }}>
+                            <option value="" {{ $kecamatan == '' || $kecamatan == null ? 'selected' : null }}>
                                 Pilih Kecamatan
                             </option>
                             @foreach ($datakecamatan as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ old('kecamatan') == $item->id ? 'selected' : null }}>
+                                    {{ $kecamatan == $item->id ? 'selected' : null }}>
                                     {{ $item->nama }}
                                 </option>
                             @endforeach
@@ -298,13 +263,12 @@
                     <div class="select is-fullwidth  @error('kelurahan') is-danger @enderror">
                         <select id="kelurahan" name="kelurahan" wire:model='kelurahan'
                             {{ $kecamatan == '' || $kecamatan == null ? 'disabled' : null }}>
-                            <option value=""
-                                {{ old('kelurahan') == '' || old('kelurahan') == null ? 'selected' : null }}>
+                            <option value="" {{ $kelurahan == '' || $kelurahan == null ? 'selected' : null }}>
                                 Pilih Kelurahan
                             </option>
                             @foreach ($datakelurahan as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ old('kelurahan') == $item->id ? 'selected' : null }}>
+                                    {{ $kelurahan == $item->id ? 'selected' : null }}>
                                     {{ $item->nama }}
                                 </option>
                             @endforeach
@@ -333,22 +297,27 @@
                     <div class="select is-fullwidth @error('pekerjaan') is-danger @enderror">
                         <select id="pekerjaan" name="pekerjaan">
                             <option value=""
-                                {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
+                                {{ $datanasabah->detailNasabah->pekerjaan == '' || $datanasabah->detailNasabah->pekerjaan == null ? 'selected' : null }}>
                                 Pilih Pekerjaan
                             </option>
-                            <option value="1" {{ old('pekerjaan') == 1 ? 'selected' : null }}>
+                            <option value="1"
+                                {{ $datanasabah->detailNasabah->pekerjaan == 1 ? 'selected' : null }}>
                                 Aparatur Sipil Negara / Tentara
                             </option>
-                            <option value="2" {{ old('pekerjaan') == 2 ? 'selected' : null }}>
+                            <option value="2"
+                                {{ $datanasabah->detailNasabah->pekerjaan == 2 ? 'selected' : null }}>
                                 Pengusaha / Wiraswasta
                             </option>
-                            <option value="3" {{ old('pekerjaan') == 3 ? 'selected' : null }}>
+                            <option value="3"
+                                {{ $datanasabah->detailNasabah->pekerjaan == 3 ? 'selected' : null }}>
                                 Karyawan Tetap
                             </option>
-                            <option value="4" {{ old('pekerjaan') == 4 ? 'selected' : null }}>
+                            <option value="4"
+                                {{ $datanasabah->detailNasabah->pekerjaan == 4 ? 'selected' : null }}>
                                 Karyawan Lepas
                             </option>
-                            <option value="5" {{ old('pekerjaan') == 5 ? 'selected' : null }}>
+                            <option value="5"
+                                {{ $datanasabah->detailNasabah->pekerjaan == 5 ? 'selected' : null }}>
                                 Tidak Bekerja
                             </option>
                         </select>
@@ -371,22 +340,23 @@
                 <div class="control @error('gaji') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('gaji') is-danger @enderror">
                         <select id="gaji" name="gaji">
-                            <option value="" {{ old('gaji') == '' || old('gaji') == null ? 'selected' : null }}>
+                            <option value=""
+                                {{ $datanasabah->detailNasabah->gaji == '' || $datanasabah->detailNasabah->gaji == null ? 'selected' : null }}>
                                 Pilih Rentang Gaji / Pemasukan
                             </option>
-                            <option value="1" {{ old('gaji') == 1 ? 'selected' : null }}>
+                            <option value="1" {{ $datanasabah->detailNasabah->gaji == 1 ? 'selected' : null }}>
                                 Dibawah Rp 2.000.000
                             </option>
-                            <option value="2" {{ old('gaji') == 2 ? 'selected' : null }}>
+                            <option value="2" {{ $datanasabah->detailNasabah->gaji == 2 ? 'selected' : null }}>
                                 Rp 2.000.000 - Rp 3.499.000
                             </option>
-                            <option value="3" {{ old('gaji') == 3 ? 'selected' : null }}>
+                            <option value="3" {{ $datanasabah->detailNasabah->gaji == 3 ? 'selected' : null }}>
                                 Rp 3.500.000 - Rp 4.999.000
                             </option>
-                            <option value="4" {{ old('gaji') == 4 ? 'selected' : null }}>
+                            <option value="4" {{ $datanasabah->detailNasabah->gaji == 4 ? 'selected' : null }}>
                                 Rp 5.000.000 - Rp 7.000.000
                             </option>
-                            <option value="5" {{ old('gaji') == 5 ? 'selected' : null }}>
+                            <option value="5" {{ $datanasabah->detailNasabah->gaji == 5 ? 'selected' : null }}>
                                 Diatas Rp 7.000.000
                             </option>
                         </select>
@@ -410,16 +380,21 @@
                     <div class="select is-fullwidth @error('tanggungan') is-danger @enderror">
                         <select id="tanggungan" name="tanggungan">
                             <option value=""
-                                {{ old('tanggungan') == '' || old('tanggungan') == null ? 'selected' : null }}>
+                                {{ $datanasabah->detailNasabah->tanggungan == '' || $datanasabah->detailNasabah->tanggungan == null ? 'selected' : null }}>
                                 Pilih Jumlah Tanggungan
                             </option>
-                            <option value="1" {{ old('tanggungan') == 1 ? 'selected' : null }}>
+                            <option value="1"
+                                {{ $datanasabah->detailNasabah->tanggungan == 1 ? 'selected' : null }}>
                                 Tidak ada tanggungan
                             </option>
-                            <option value="2" {{ old('tanggungan') == 2 ? 'selected' : null }}>1 Orang</option>
-                            <option value="3" {{ old('tanggungan') == 3 ? 'selected' : null }}>2 Orang</option>
-                            <option value="4" {{ old('tanggungan') == 4 ? 'selected' : null }}>3 Orang</option>
-                            <option value="5" {{ old('tanggungan') == 5 ? 'selected' : null }}>
+                            <option value="2"
+                                {{ $datanasabah->detailNasabah->tanggungan == 2 ? 'selected' : null }}>1 Orang</option>
+                            <option value="3"
+                                {{ $datanasabah->detailNasabah->tanggungan == 3 ? 'selected' : null }}>2 Orang</option>
+                            <option value="4"
+                                {{ $datanasabah->detailNasabah->tanggungan == 4 ? 'selected' : null }}>3 Orang</option>
+                            <option value="5"
+                                {{ $datanasabah->detailNasabah->tanggungan == 5 ? 'selected' : null }}>
                                 Lebih dari 3 Orang
                             </option>
                         </select>
@@ -449,7 +424,7 @@
                     <div class="control @error('nama_pasangan') has-icons-left @enderror">
                         <input class="input @error('nama_pasangan') is-danger @enderror" type="text"
                             placeholder="Nama Pasangan" id="nama_pasangan" name="nama_pasangan"
-                            value="{{ old('nama_pasangan') }}">
+                            value="{{ $datanasabah->istri->nama }}">
                         @error('nama_pasangan')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -468,7 +443,7 @@
                     <div class="control @error('nik_pasangan') has-icons-left @enderror">
                         <input class="input @error('nik_pasangan') is-danger @enderror" type="text"
                             placeholder="NIK Pasangan" id="nik_pasangan" name="nik_pasangan"
-                            value="{{ old('nik_pasangan') }}">
+                            value="{{ $datanasabah->istri->nik }}">
                         @error('nik_pasangan')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -489,7 +464,7 @@
                     <div class="control @error('pekerjaan_pasangan') has-icons-left @enderror">
                         <input class="input @error('pekerjaan_pasangan') is-danger @enderror" type="text"
                             placeholder="Pekerjaan Pasangan" id="pekerjaan_pasangan" name="pekerjaan_pasangan"
-                            value="{{ old('pekerjaan_pasangan') }}">
+                            value="{{ $datanasabah->istri->pekerjaan }}">
                         @error('pekerjaan_pasangan')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -507,7 +482,7 @@
                     <div class="control @error('kontak_pasangan') has-icons-left @enderror">
                         <input class="input @error('kontak_pasangan') is-danger @enderror" type="text"
                             placeholder="Kontak Pasangan" id="kontak_pasangan" name="kontak_pasangan"
-                            value="{{ old('kontak_pasangan') }}">
+                            value="{{ $datanasabah->istri->kontak }}">
                         @error('kontak_pasangan')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -534,21 +509,23 @@
                         <div class="select is-fullwidth @error('hubungan_penjamin') is-danger @enderror">
                             <select id="hubungan_penjamin" name="hubungan_penjamin">
                                 <option value=""
-                                    {{ old('hubungan_penjamin') == '' || old('hubungan_penjamin') == null ? 'selected' : null }}>
+                                    {{ $datanasabah->penjamin->tipe_penjamin == '' || $datanasabah->penjamin->tipe_penjamin == null ? 'selected' : null }}>
                                     Pilih Hubungan Penjamin
                                 </option>
-                                <option value="ayah" {{ old('hubungan_penjamin') == 'ayah' ? 'selected' : null }}>
+                                <option value="ayah"
+                                    {{ $datanasabah->penjamin->tipe_penjamin == 'ayah' ? 'selected' : null }}>
                                     Ayah
                                 </option>
-                                <option value="ibu" {{ old('hubungan_penjamin') == 'ibu' ? 'selected' : null }}>
+                                <option value="ibu"
+                                    {{ $datanasabah->penjamin->tipe_penjamin == 'ibu' ? 'selected' : null }}>
                                     Ibu
                                 </option>
                                 <option value="saudara"
-                                    {{ old('hubungan_penjamin') == 'saudara' ? 'selected' : null }}>
+                                    {{ $datanasabah->penjamin->tipe_penjamin == 'saudara' ? 'selected' : null }}>
                                     Saudara
                                 </option>
                                 <option value="lainnya"
-                                    {{ old('hubungan_penjamin') == 'lainnya' ? 'selected' : null }}>
+                                    {{ $datanasabah->penjamin->tipe_penjamin == 'lainnya' ? 'selected' : null }}>
                                     Lainnya
                                 </option>
                             </select>
@@ -571,7 +548,7 @@
                     <div class="control @error('nama_penjamin') has-icons-left @enderror">
                         <input class="input @error('nama_penjamin') is-danger @enderror" type="text"
                             placeholder="Nama Penjamin" id="nama_penjamin" name="nama_penjamin"
-                            value="{{ old('nama_penjamin') }}">
+                            value="{{ $datanasabah->penjamin->nama }}">
                         @error('nama_penjamin')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -589,7 +566,7 @@
                     <div class="control @error('kontak_penjamin') has-icons-left @enderror">
                         <input class="input @error('kontak_penjamin') is-danger @enderror" type="text"
                             placeholder="Kontak Penjamin" id="kontak_penjamin" name="kontak_penjamin"
-                            value="{{ old('kontak_penjamin') }}">
+                            value="{{ $datanasabah->penjamin->kontak }}">
                         @error('kontak_penjamin')
                             <span class="icon is-small is-right has-text-danger">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -608,7 +585,7 @@
                     <label class="label" for="alamat_penjamin">Alamat <span class="has-text-danger">*</span></label>
                     <div class="control">
                         <textarea name="alamat_penjamin" id="alamat_penjamin" cols="30" rows="10"
-                            class="textarea @error('alamat_penjamin') is-danger @enderror" placeholder="Alamat Penjamin Nasabah">{{ old('alamat_penjamin') }}</textarea>
+                            class="textarea @error('alamat_penjamin') is-danger @enderror" placeholder="Alamat Penjamin Nasabah">{{ $datanasabah->penjamin->alamat }}</textarea>
                         @error('alamat_penjamin')
                             <span class="has-text-weight-bold has-text-danger">
                                 * {{ $message }}

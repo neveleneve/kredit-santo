@@ -9,44 +9,30 @@ class KriteriaBobotController extends Controller
 {
     public function index()
     {
-        $kriteriaBobot = KriteriaBobot::get();
+        $kriteriaBobot = KriteriaBobot::orderBy('tipe')->get();
         return view('admin.kriteria.index', [
-            'kriteriaBobot' => $kriteriaBobot
-        ]);
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(KriteriaBobot $kriteriaBobot)
-    {
-        return view('admin.kriteria.show', [
             'kriteria' => $kriteriaBobot
         ]);
     }
 
     public function edit(KriteriaBobot $kriteriaBobot)
     {
+        $sumbobot = KriteriaBobot::where('tipe', $kriteriaBobot->tipe)->sum('bobot');
         return view('admin.kriteria.edit', [
-            'kriteria' => $kriteriaBobot
+            'kriteria' => $kriteriaBobot,
+            'total' => 100 - $sumbobot,
         ]);
     }
 
-
     public function update(Request $request, KriteriaBobot $kriteriaBobot)
     {
-        //
-    }
-
-    public function destroy(KriteriaBobot $kriteriaBobot)
-    {
-        //
+        // dd([$request->all(), $kriteriaBobot]);
+        $kriteriaBobot->update([
+            'bobot' => $request->bobot
+        ]);
+        return redirect(route('kriteria-bobot.index'))->with([
+            'color' => 'success',
+            'message' => 'Berhasil mengubah data kriteria!',
+        ]);
     }
 }

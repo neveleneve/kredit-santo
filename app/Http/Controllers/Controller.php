@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KriteriaBobot;
+use App\Models\Nasabah;
 use App\Models\Rumah;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -49,4 +51,33 @@ class Controller extends BaseController
 
         return $verifiedcode;
     }
+    // wp
+    private function vectorS($c, $w, $tipe)
+    {
+        $s = 0;
+        for ($i = 0; $i < count($c); $i++) {
+            if ($i == 0) {
+                if ($tipe[$i] == 0) {
+                    $s = number_format(pow($c[$i], $w[$i]), 3, '.', ',');
+                } elseif ($tipe[$i] == 1) {
+                    $s = number_format(pow($c[$i], (-$w[$i])), 3, '.', ',');
+                }
+            } else {
+                if ($tipe[$i] == 0) {
+                    $s = $s * number_format(pow($c[$i], $w[$i]), 3, '.', ',');
+                } elseif ($tipe[$i] == 1) {
+                    $s = $s *  number_format(pow($c[$i], (-$w[$i])), 3, '.', ',');
+                }
+            }
+        }
+        return number_format($s, 3, '.', ',');
+    }
+
+    public function hitungWP(Nasabah $nasabah)
+    {
+        $bobot = KriteriaBobot::where('tipe', 'wp')->get('nama', 'bobot');
+        $totalbobot = KriteriaBobot::where('tipe', 'wp')->sum('bobot');
+    }
+    // mfep
+
 }

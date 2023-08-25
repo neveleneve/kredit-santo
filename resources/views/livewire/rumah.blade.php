@@ -12,7 +12,7 @@
     <div class="columns">
         <div class="column">
             @if (session()->has('message'))
-                <div class="notification is-{{ session('color') }} has-text-weight-bold peringatan">
+                <div class="notification is-{{ session('color') }} has-text-weight-bold">
                     {{ session('message') }}
                 </div>
             @endif

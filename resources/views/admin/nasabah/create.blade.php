@@ -17,8 +17,6 @@
                                 @csrf
                                 <h3 class="has-text-weight-bold has-text-centered">Data Nasabah</h3>
                                 <hr>
-                                {{-- nama, kelamin, pernikahan --}}
-
                                 @livewire('add-nasabah')
                                 <div class="columns">
                                     <div class="column is-6-desktop is-12-mobile">

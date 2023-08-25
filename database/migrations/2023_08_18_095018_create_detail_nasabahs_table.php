@@ -18,12 +18,14 @@ class CreateDetailNasabahsTable extends Migration
             $table->string('nasabah_id');
             $table->string('nik');
             $table->string('no_kk');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->string('kontak');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->enum('status_pernikahan', ['belum kawin', 'kawin', 'cerai hidup', 'cerai mati']);
-            $table->enum('pekerjaan', [1, 2, 3]);
-            $table->enum('gaji', [1, 2, 3]);
-            $table->enum('pengeluaran', [1, 2, 3]);
-            $table->enum('tanggungan', [1, 2, 3]);
+            $table->enum('pekerjaan', [1, 2, 3, 4, 5]);
+            $table->enum('gaji', [1, 2, 3, 4, 5]);
+            $table->enum('tanggungan', [1, 2, 3, 4, 5]);
             $table->timestamps();
         });
     }
