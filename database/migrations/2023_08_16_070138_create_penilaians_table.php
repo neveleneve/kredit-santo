@@ -21,6 +21,7 @@ class CreatePenilaiansTable extends Migration
             $table->integer('tenor');
             $table->float('nilai_mfep');
             $table->float('nilai_wp');
+            $table->enum('status', [0, 1])->default('0')->nullable();
             $table->timestamps();
         });
     }

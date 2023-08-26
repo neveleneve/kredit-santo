@@ -52,32 +52,44 @@ class Controller extends BaseController
         return $verifiedcode;
     }
     // wp
-    private function vectorS($c, $w, $tipe)
+    public function vectorS($c, $w)
     {
         $s = 0;
         for ($i = 0; $i < count($c); $i++) {
-            if ($i == 0) {
-                if ($tipe[$i] == 0) {
-                    $s = number_format(pow($c[$i], $w[$i]), 3, '.', ',');
-                } elseif ($tipe[$i] == 1) {
-                    $s = number_format(pow($c[$i], (-$w[$i])), 3, '.', ',');
-                }
-            } else {
-                if ($tipe[$i] == 0) {
-                    $s = $s * number_format(pow($c[$i], $w[$i]), 3, '.', ',');
-                } elseif ($tipe[$i] == 1) {
-                    $s = $s *  number_format(pow($c[$i], (-$w[$i])), 3, '.', ',');
-                }
-            }
+            $s += number_format(pow($c[$i], $w[$i]), 3, '.', ',');
         }
         return number_format($s, 3, '.', ',');
     }
 
-    public function hitungWP(Nasabah $nasabah)
+    public function hitungWP($data)
     {
-        $bobot = KriteriaBobot::where('tipe', 'wp')->get('nama', 'bobot');
-        $totalbobot = KriteriaBobot::where('tipe', 'wp')->sum('bobot');
+        $bobot = KriteriaBobot::where('tipe', 'wp')
+            ->orderBy('id')
+            ->get('bobot');
+        $totalbobot = KriteriaBobot::where('tipe', 'wp')
+            ->sum('bobot');
+
+        for ($i = 0; $i < count($bobot); $i++) {
+            $w[$i] = number_format($bobot[$i]->bobot / $totalbobot, 3, '.', ',');
+        }
+
+        $nilai = $this->vectorS($data, $w);
+        return $nilai;
     }
     // mfep
 
+    public function hitungMFEP($data)
+    {
+        // $weight =
+        $bobot = KriteriaBobot::where('tipe', 'mfep')
+            ->orderBy('id')
+            ->get('bobot');
+        $nilaimfep = 0;
+
+        for ($i = 0; $i < count($bobot); $i++) {
+            $nilaimfep += number_format($data[$i] * ($bobot[$i]->bobot / 100), 2, '.', ',');
+        }
+
+        return $nilaimfep;
+    }
 }

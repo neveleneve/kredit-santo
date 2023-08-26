@@ -16,6 +16,7 @@ class Penilaian extends Model
         'tenor',
         'nilai_mfep',
         'nilai_wp',
+        'status',
     ];
 
     public function nasabah()

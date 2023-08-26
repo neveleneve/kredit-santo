@@ -31,9 +31,9 @@ class NasabahSeeder extends Seeder
             'kontak' => '715141230701',
             'jenis_kelamin' => 'laki-laki',
             'status_pernikahan' => 'kawin',
-            'pekerjaan' => '1',
-            'gaji' => '5',
-            'tanggungan' => '4',
+            'pekerjaan' => '100',
+            'gaji' => '100',
+            'tanggungan' => '40',
         ]);
         Istri::create([
             'nasabah_id' => $nasabah->id,

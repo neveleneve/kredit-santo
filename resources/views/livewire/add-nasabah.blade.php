@@ -331,24 +331,25 @@
                 <label class="label" for="pekerjaan">Pekerjaan <span class="has-text-danger">*</span></label>
                 <div class="control @error('pekerjaan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('pekerjaan') is-danger @enderror">
+                        {{-- jaminan (c4 wp) --}}
                         <select id="pekerjaan" name="pekerjaan">
                             <option value=""
                                 {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
                                 Pilih Pekerjaan
                             </option>
-                            <option value="1" {{ old('pekerjaan') == 1 ? 'selected' : null }}>
+                            <option value="100" {{ old('pekerjaan') == 100 ? 'selected' : null }}>
                                 Aparatur Sipil Negara / Tentara
                             </option>
-                            <option value="2" {{ old('pekerjaan') == 2 ? 'selected' : null }}>
+                            <option value="75" {{ old('pekerjaan') == 75 ? 'selected' : null }}>
                                 Pengusaha / Wiraswasta
                             </option>
-                            <option value="3" {{ old('pekerjaan') == 3 ? 'selected' : null }}>
-                                Karyawan Tetap
+                            <option value="50" {{ old('pekerjaan') == 50 ? 'selected' : null }}>
+                                Karyawan Swasta (Tetap)
                             </option>
-                            <option value="4" {{ old('pekerjaan') == 4 ? 'selected' : null }}>
-                                Karyawan Lepas
+                            <option value="20" {{ old('pekerjaan') == 20 ? 'selected' : null }}>
+                                Karyawan Swasta (Lepas)
                             </option>
-                            <option value="5" {{ old('pekerjaan') == 5 ? 'selected' : null }}>
+                            <option value="0" {{ old('pekerjaan') == 0 ? 'selected' : null }}>
                                 Tidak Bekerja
                             </option>
                         </select>
@@ -370,23 +371,24 @@
                         class="has-text-danger">*</span></label>
                 <div class="control @error('gaji') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('gaji') is-danger @enderror">
+                        {{-- kemampuan (c3 wp) --}}
                         <select id="gaji" name="gaji">
                             <option value="" {{ old('gaji') == '' || old('gaji') == null ? 'selected' : null }}>
                                 Pilih Rentang Gaji / Pemasukan
                             </option>
-                            <option value="1" {{ old('gaji') == 1 ? 'selected' : null }}>
+                            <option value="30" {{ old('gaji') == 30 ? 'selected' : null }}>
                                 Dibawah Rp 2.000.000
                             </option>
-                            <option value="2" {{ old('gaji') == 2 ? 'selected' : null }}>
+                            <option value="50" {{ old('gaji') == 50 ? 'selected' : null }}>
                                 Rp 2.000.000 - Rp 3.499.000
                             </option>
-                            <option value="3" {{ old('gaji') == 3 ? 'selected' : null }}>
+                            <option value="60" {{ old('gaji') == 60 ? 'selected' : null }}>
                                 Rp 3.500.000 - Rp 4.999.000
                             </option>
-                            <option value="4" {{ old('gaji') == 4 ? 'selected' : null }}>
+                            <option value="80" {{ old('gaji') == 80 ? 'selected' : null }}>
                                 Rp 5.000.000 - Rp 7.000.000
                             </option>
-                            <option value="5" {{ old('gaji') == 5 ? 'selected' : null }}>
+                            <option value="100" {{ old('gaji') == 100 ? 'selected' : null }}>
                                 Diatas Rp 7.000.000
                             </option>
                         </select>
@@ -408,18 +410,19 @@
                         class="has-text-danger">*</span></label>
                 <div class="control @error('tanggungan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('tanggungan') is-danger @enderror">
+                        {{-- kondisi (c5 wp) --}}
                         <select id="tanggungan" name="tanggungan">
                             <option value=""
                                 {{ old('tanggungan') == '' || old('tanggungan') == null ? 'selected' : null }}>
                                 Pilih Jumlah Tanggungan
                             </option>
-                            <option value="1" {{ old('tanggungan') == 1 ? 'selected' : null }}>
+                            <option value="100" {{ old('tanggungan') == 100 ? 'selected' : null }}>
                                 Tidak ada tanggungan
                             </option>
-                            <option value="2" {{ old('tanggungan') == 2 ? 'selected' : null }}>1 Orang</option>
-                            <option value="3" {{ old('tanggungan') == 3 ? 'selected' : null }}>2 Orang</option>
-                            <option value="4" {{ old('tanggungan') == 4 ? 'selected' : null }}>3 Orang</option>
-                            <option value="5" {{ old('tanggungan') == 5 ? 'selected' : null }}>
+                            <option value="80" {{ old('tanggungan') == 80 ? 'selected' : null }}>1 Orang</option>
+                            <option value="60" {{ old('tanggungan') == 60 ? 'selected' : null }}>2 Orang</option>
+                            <option value="40" {{ old('tanggungan') == 40 ? 'selected' : null }}>3 Orang</option>
+                            <option value="20" {{ old('tanggungan') == 20 ? 'selected' : null }}>
                                 Lebih dari 3 Orang
                             </option>
                         </select>

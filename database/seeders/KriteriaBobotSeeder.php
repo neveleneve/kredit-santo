@@ -57,7 +57,7 @@ class KriteriaBobotSeeder extends Seeder
             'tipe' => 'wp',
         ]);
         KriteriaBobot::create([
-            'nama' => 'Kondisi',
+            'nama' => 'Kondisi (Tanggungan)',
             'bobot' => 15,
             'tipe' => 'wp',
         ]);
