@@ -29,13 +29,13 @@ Auth::routes([
 ]);
 
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-// Route::get('test', [Controller::class, 'test'])->name('test');
 Route::resource('nasabah', NasabahController::class)->except([
     'show'
 ]);
 Route::resource('rumah', RumahController::class)->except([
     'show'
 ]);
+Route::get('penilaian/cetak/{id}', [PenilaianController::class, 'cetak'])->name('penilaian.cetak');
 Route::resource('penilaian', PenilaianController::class);
 Route::resource('kriteria-bobot', KriteriaBobotController::class)->except([
     'show',

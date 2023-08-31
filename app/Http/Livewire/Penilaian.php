@@ -18,8 +18,8 @@ class Penilaian extends Component
         if ($this->search == '' || $this->search == null) {
             $penilaian = ModelsPenilaian::with('nasabah', 'rumah')->paginate(10);
         } else {
-            $penilaian = ModelsPenilaian::with('nasabah', 'rumah')->where('nama', 'LIKE', '%' . $this->search . '%')
-                ->orWhereHas('nasabah', function ($query) {
+            $penilaian = ModelsPenilaian::with('nasabah', 'rumah')
+                ->whereHas('nasabah', function ($query) {
                     $query
                         ->where('nama', 'like', '%' . $this->search . '%');
                 })

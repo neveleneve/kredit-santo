@@ -24,7 +24,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item has-text-weight-bold is-size-5" href="{{ route('landing-page') }}">
-                    {{ env('APP_NAME') }}
+                    Kredit Rumah
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                     data-target="navbarBasicExample">

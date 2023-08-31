@@ -14,6 +14,7 @@ class Penilaian extends Model
         'rumah_id',
         'dp',
         'tenor',
+        'bi_checking',
         'nilai_mfep',
         'nilai_wp',
         'status',

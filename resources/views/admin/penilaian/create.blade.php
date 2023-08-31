@@ -147,7 +147,7 @@
                                 <div class="columns">
                                     <div class="column is-6-desktop is-12-mobile">
                                         <a class="button is-danger is-fullwidth has-text-weight-bold"
-                                            href="{{ route('rumah.index') }}">
+                                            href="{{ route('penilaian.index') }}">
                                             <i class="fa fa-chevron-left"></i>
                                             &nbsp;
                                             Kembali

@@ -19,6 +19,7 @@ class CreatePenilaiansTable extends Migration
             $table->integer('rumah_id');
             $table->integer('dp');
             $table->integer('tenor');
+            $table->integer('bi_checking');
             $table->float('nilai_mfep');
             $table->float('nilai_wp');
             $table->enum('status', [0, 1])->default('0')->nullable();

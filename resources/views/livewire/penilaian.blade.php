@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="column is-4-desktop is-offset-4-desktop is-12-mobile my-0">
-            <input class="input is-default is-small" type="text" placeholder="Pencarian">
+            <input class="input is-default is-small" type="text" placeholder="Pencarian" wire:model='search'>
         </div>
     </div>
     <div class="columns">
@@ -44,7 +44,8 @@
                                     href="{{ route('penilaian.show', ['penilaian' => $item->id]) }}">
                                     Lihat
                                 </a>
-                                <a class="button is-info is-small has-text-weight-bold">
+                                <a href="{{ route('penilaian.cetak', ['id' => $item->id]) }}" target="__blank"
+                                    class="button is-info is-small has-text-weight-bold">
                                     Cetak
                                 </a>
                             </td>

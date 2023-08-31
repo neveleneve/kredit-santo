@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KriteriaBobot;
 use App\Models\Nasabah;
 use App\Models\Penilaian;
 use App\Models\Rumah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class PenilaianController extends Controller
 {
@@ -101,11 +103,11 @@ class PenilaianController extends Controller
                 'rumah_id' => $request->rumah,
                 'dp' => $request->dp,
                 'tenor' => $request->tenor,
+                'bi_checking' => $request->bi,
                 'nilai_wp' => $nilaiwp,
                 'nilai_mfep' => $nilaimfep,
                 'status' => $status,
             ]);
-
 
             if ($penilaian) {
                 return redirect(route('penilaian.index'))->with([
@@ -124,7 +126,23 @@ class PenilaianController extends Controller
 
     public function show(Penilaian $penilaian)
     {
-        //
+        $datapoin = [
+            0 => $penilaian->bi_checking, // bi checking (karakter)
+            1 => $penilaian->nasabah->detailNasabah->pekerjaan, // pekerjaan (kapasitas)
+            2 => $penilaian->nasabah->detailNasabah->gaji, // gaji (pendapatan)
+            3 => $penilaian->nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
+            4 => $penilaian->bi_checking, // bi checking (karakter)
+            5 => $penilaian->dp, // uang dp (kapital)
+            6 => $penilaian->nasabah->detailNasabah->gaji, // gaji (kapasitas)
+            7 => $penilaian->nasabah->detailNasabah->pekerjaan, // pekerjaan (jaminan)
+            8 => $penilaian->nasabah->detailNasabah->tanggungan,
+        ];
+        $bobotkriteria = KriteriaBobot::get();
+        return view('admin.penilaian.show', [
+            'penilaian' => $penilaian,
+            'bobot' => $bobotkriteria,
+            'datapoin' => $datapoin,
+        ]);
     }
 
     public function edit(Penilaian $penilaian)
@@ -140,5 +158,35 @@ class PenilaianController extends Controller
     public function destroy(Penilaian $penilaian)
     {
         //
+    }
+
+    public function cetak(Penilaian $id)
+    {
+        $bobot = KriteriaBobot::get();
+        $datapoin = [
+            0 => $id->bi_checking, // bi checking (karakter)
+            1 => $id->nasabah->detailNasabah->pekerjaan, // pekerjaan (kapasitas)
+            2 => $id->nasabah->detailNasabah->gaji, // gaji (pendapatan)
+            3 => $id->nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
+            4 => $id->bi_checking, // bi checking (karakter)
+            5 => $id->dp, // uang dp (kapital)
+            6 => $id->nasabah->detailNasabah->gaji, // gaji (kapasitas)
+            7 => $id->nasabah->detailNasabah->pekerjaan, // pekerjaan (jaminan)
+            8 => $id->nasabah->detailNasabah->tanggungan,
+        ];
+        $data = [
+            'title' => 'Penilaian Nasabah - CV Halifa Berkah Utama',
+            'penilaian' => $id,
+            'bobot' => $bobot,
+            'datapoin' => $datapoin,
+        ];
+        $pdf = PDF::loadView('admin.penilaian.cetak-ketentuan', $data);
+        // $header = view('pdf.header');
+        // $pdf->getDomPDF()->getCanvas()->page_script(function ($pageNumber, $canvas) use ($header) {
+        //     if ($pageNumber > 1) {
+        //         $canvas->text(250, 15, $header, 0, 0, 'center');
+        //     }
+        // });
+        return $pdf->stream($data['title'] . '.pdf');
     }
 }
