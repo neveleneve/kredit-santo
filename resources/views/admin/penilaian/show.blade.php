@@ -241,6 +241,17 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td colspan="2" class="has-text-weight-bold is-dark">
+                                                    Data Penilaian Nasabah
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Skor</td>
+                                                <td>
+                                                    {{ 0.6 * $penilaian->nilai_wp + 0.4 * $penilaian->nilai_mfep }}
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

@@ -32,6 +32,7 @@ class NasabahController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validasi = null;
         if ($request->kawin == 'kawin') {
             $validasi = Validator::make($request->all(), [

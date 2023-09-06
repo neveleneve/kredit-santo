@@ -17,7 +17,7 @@ class KriteriaBobotSeeder extends Seeder
         // mfep
         KriteriaBobot::create([
             'nama' => 'Karakter',
-            'bobot' => 20,
+            'bobot' => 35,
             'tipe' => 'mfep',
         ]);
         KriteriaBobot::create([
@@ -27,18 +27,18 @@ class KriteriaBobotSeeder extends Seeder
         ]);
         KriteriaBobot::create([
             'nama' => 'Pendapatan',
-            'bobot' => 35,
+            'bobot' => 25,
             'tipe' => 'mfep',
         ]);
         KriteriaBobot::create([
             'nama' => 'Kondisi',
-            'bobot' => 20,
+            'bobot' => 15,
             'tipe' => 'mfep',
         ]);
         // wp
         KriteriaBobot::create([
             'nama' => 'Karakter',
-            'bobot' => 25,
+            'bobot' => 35,
             'tipe' => 'wp',
         ]);
         KriteriaBobot::create([
@@ -48,17 +48,17 @@ class KriteriaBobotSeeder extends Seeder
         ]);
         KriteriaBobot::create([
             'nama' => 'Kapasitas (Kemampuan)',
-            'bobot' => 30,
+            'bobot' => 20,
             'tipe' => 'wp',
         ]);
         KriteriaBobot::create([
             'nama' => 'Kolateral (Jaminan)',
-            'bobot' => 15,
+            'bobot' => 25,
             'tipe' => 'wp',
         ]);
         KriteriaBobot::create([
             'nama' => 'Kondisi (Tanggungan)',
-            'bobot' => 15,
+            'bobot' => 10,
             'tipe' => 'wp',
         ]);
     }

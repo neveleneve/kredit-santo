@@ -90,8 +90,8 @@ class PenilaianController extends Controller
 
             // dd([$nilaiwp, $nilaimfep, $kombinasi]);
             // ubah sesuai dengan kebutuhan di dokumen 
-            $status = 0;
-            if ($kombinasi > 25) {
+            $status = '0';
+            if ($kombinasi > 36) {
                 Rumah::find($request->rumah)->update([
                     'status' => '0'
                 ]);
@@ -164,15 +164,17 @@ class PenilaianController extends Controller
     {
         $bobot = KriteriaBobot::get();
         $datapoin = [
+            // mfep
             0 => $id->bi_checking, // bi checking (karakter)
             1 => $id->nasabah->detailNasabah->pekerjaan, // pekerjaan (kapasitas)
             2 => $id->nasabah->detailNasabah->gaji, // gaji (pendapatan)
             3 => $id->nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
+            // wp
             4 => $id->bi_checking, // bi checking (karakter)
             5 => $id->dp, // uang dp (kapital)
             6 => $id->nasabah->detailNasabah->gaji, // gaji (kapasitas)
             7 => $id->nasabah->detailNasabah->pekerjaan, // pekerjaan (jaminan)
-            8 => $id->nasabah->detailNasabah->tanggungan,
+            8 => $id->nasabah->detailNasabah->tanggungan, // kondisi (tanggungan)
         ];
         $data = [
             'title' => 'Penilaian Nasabah - CV Halifa Berkah Utama',
@@ -181,12 +183,33 @@ class PenilaianController extends Controller
             'datapoin' => $datapoin,
         ];
         $pdf = PDF::loadView('admin.penilaian.cetak-ketentuan', $data);
-        // $header = view('pdf.header');
-        // $pdf->getDomPDF()->getCanvas()->page_script(function ($pageNumber, $canvas) use ($header) {
-        //     if ($pageNumber > 1) {
-        //         $canvas->text(250, 15, $header, 0, 0, 'center');
-        //     }
-        // });
         return $pdf->stream($data['title'] . '.pdf');
+    }
+
+    public function cetakDate(Request $request)
+    {
+        $validasi = Validator::make($request->all(), [
+            'dari' => ['required', 'date', 'before_or_equal:sampai'],
+            'sampai' => ['required', 'after_or_equal:dari'],
+        ]);
+
+        if ($validasi->fails()) {
+            return redirect(route('penilaian.index'))->with([
+                'message' => 'Kesalahan dalam input tanggal! Silakan ulangi!',
+                'color' => 'danger',
+            ]);
+        } else {
+            $from = date('Y-m-d', strtotime($request->dari));
+            $to = date('Y-m-d', strtotime($request->sampai));
+            $data = Penilaian::with('nasabah', 'rumah')->whereBetween('created_at', [$from, $to])->get();
+        }
+
+        $pdf = PDF::loadView('admin.penilaian.cetak-table', [
+            'data' => $data,
+            'title' => 'Laporan Penilaian Nasabah',
+            'dari' => $request->dari,
+            'sampai' => $request->sampai,
+        ]);
+        return $pdf->stream('Penilaian Nasabah.pdf');
     }
 }

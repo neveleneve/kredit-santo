@@ -17,6 +17,7 @@ class DetailNasabah extends Model
         'tanggal_lahir',
         'kontak',
         'jenis_kelamin',
+        'status_pernikahan',
         'pekerjaan',
         'gaji',
         'tanggungan',

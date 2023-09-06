@@ -35,6 +35,7 @@ Route::resource('nasabah', NasabahController::class)->except([
 Route::resource('rumah', RumahController::class)->except([
     'show'
 ]);
+Route::post('penilaian/cetak', [PenilaianController::class, 'cetakDate'])->name('penilaian.cetak.date');
 Route::get('penilaian/cetak/{id}', [PenilaianController::class, 'cetak'])->name('penilaian.cetak');
 Route::resource('penilaian', PenilaianController::class);
 Route::resource('kriteria-bobot', KriteriaBobotController::class)->except([

@@ -76,8 +76,8 @@ class Controller extends BaseController
         $nilai = $this->vectorS($data, $w);
         return $nilai;
     }
-    // mfep
 
+    // mfep
     public function hitungMFEP($data)
     {
         // $weight =

@@ -333,8 +333,7 @@
                     <div class="select is-fullwidth @error('pekerjaan') is-danger @enderror">
                         {{-- jaminan (c4 wp) --}}
                         <select id="pekerjaan" name="pekerjaan">
-                            <option value=""
-                                {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
+                            <option {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
                                 Pilih Pekerjaan
                             </option>
                             <option value="100" {{ old('pekerjaan') == 100 ? 'selected' : null }}>

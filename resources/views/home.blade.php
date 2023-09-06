@@ -41,7 +41,7 @@
                                         <div class="column">
                                             <div class="content">
                                                 <p class="title is-3">Jumlah Nasabah Terverifikasi</p>
-                                                <p class="subtitle is-4">0</p>
+                                                <p class="subtitle is-4">{{ $nasabah['verified'] }}</p>
                                             </div>
                                         </div>
                                     </div>
