@@ -76,6 +76,11 @@
                                     <td class="has-text-centered">{{ $item->status ? 'Layak' : 'Tidak Layak' }}</td>
                                 </tr>
                             @empty
+                                <tr>
+                                    <td class="has-text-centered" colspan="3">
+                                        <h4 class="title is-6">Data Penilaian Kosong</h4>
+                                    </td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

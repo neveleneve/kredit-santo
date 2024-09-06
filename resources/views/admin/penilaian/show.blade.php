@@ -228,15 +228,15 @@
                                             <tr>
                                                 <td class="has-text-weight-bold">BI Checking</td>
                                                 <td>
-                                                    @if ($penilaian->dp == 20)
+                                                    @if ($penilaian->bi_checking == 20)
                                                         Skor 5
-                                                    @elseif ($penilaian->dp == 30)
+                                                    @elseif ($penilaian->bi_checking == 30)
                                                         Skor 4
-                                                    @elseif ($penilaian->dp == 40)
+                                                    @elseif ($penilaian->bi_checking == 40)
                                                         Skor 3
-                                                    @elseif ($penilaian->dp == 80)
+                                                    @elseif ($penilaian->bi_checking == 80)
                                                         Skor 2
-                                                    @elseif ($penilaian->dp == 100)
+                                                    @elseif ($penilaian->bi_checking == 100)
                                                         Skor 1
                                                     @endif
                                                 </td>

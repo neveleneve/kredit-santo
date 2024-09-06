@@ -10,23 +10,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 
-class PenilaianController extends Controller
-{
-    public function __construct()
-    {
+class PenilaianController extends Controller {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
         $penilaian = Penilaian::all();
         return view('admin.penilaian.index', [
             'penilaian' => $penilaian,
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         $nasabah = Nasabah::get();
         $rumah = Rumah::where('status', '2')->get();
         return view('admin.penilaian.create', [
@@ -35,8 +31,7 @@ class PenilaianController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // dd($request->all());
         $validasi = Validator::make($request->all(), [
             'rumah' => ['required', 'numeric'],
@@ -124,8 +119,7 @@ class PenilaianController extends Controller
         }
     }
 
-    public function show(Penilaian $penilaian)
-    {
+    public function show(Penilaian $penilaian) {
         $datapoin = [
             0 => $penilaian->bi_checking, // bi checking (karakter)
             1 => $penilaian->nasabah->detailNasabah->pekerjaan, // pekerjaan (kapasitas)
@@ -145,23 +139,19 @@ class PenilaianController extends Controller
         ]);
     }
 
-    public function edit(Penilaian $penilaian)
-    {
+    public function edit(Penilaian $penilaian) {
         //
     }
 
-    public function update(Request $request, Penilaian $penilaian)
-    {
+    public function update(Request $request, Penilaian $penilaian) {
         //
     }
 
-    public function destroy(Penilaian $penilaian)
-    {
+    public function destroy(Penilaian $penilaian) {
         //
     }
 
-    public function cetak(Penilaian $id)
-    {
+    public function cetak(Penilaian $id) {
         $bobot = KriteriaBobot::get();
         $datapoin = [
             // mfep
@@ -186,8 +176,7 @@ class PenilaianController extends Controller
         return $pdf->stream($data['title'] . '.pdf');
     }
 
-    public function cetakDate(Request $request)
-    {
+    public function cetakDate(Request $request) {
         $validasi = Validator::make($request->all(), [
             'dari' => ['required', 'date', 'before_or_equal:sampai'],
             'sampai' => ['required', 'after_or_equal:dari'],

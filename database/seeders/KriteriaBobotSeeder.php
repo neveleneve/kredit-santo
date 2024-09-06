@@ -5,15 +5,13 @@ namespace Database\Seeders;
 use App\Models\KriteriaBobot;
 use Illuminate\Database\Seeder;
 
-class KriteriaBobotSeeder extends Seeder
-{
+class KriteriaBobotSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         // mfep
         KriteriaBobot::create([
             'nama' => 'Karakter',
@@ -53,7 +51,7 @@ class KriteriaBobotSeeder extends Seeder
         ]);
         KriteriaBobot::create([
             'nama' => 'Kolateral (Jaminan)',
-            'bobot' => 25,
+            'bobot' => 20,
             'tipe' => 'wp',
         ]);
         KriteriaBobot::create([

@@ -85,7 +85,7 @@
                 <tbody>
                     @forelse ($penilaian as $item)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{{ ($penilaian->currentPage() - 1) * $penilaian->perPage() + $loop->index + 1 }}</td>
                             <td>{{ $item->nasabah->nama }}</td>
                             <td>{{ $item->rumah->rumah_code }}</td>
                             <td>WP : {{ $item->nilai_wp }}
