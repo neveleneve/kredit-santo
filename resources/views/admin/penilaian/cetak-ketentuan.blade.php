@@ -41,7 +41,7 @@
         <img src="{{ url('storage/images/images.png') }}" alt="Logo Perusahaan" width="100"
             style="float: left; margin-right: 20px;">
         {{-- <div> --}}
-        <h2 class="has-text-weight-bold" style="padding: 0px; margin: 0px; text-align: center">
+        <h2 class="has-text-weight-bold is-size-3" style="padding: 0px; margin: 0px; text-align: center">
             PT Sinar Bahagia Group
         </h2>
         <p style="text-align: center">
@@ -112,8 +112,8 @@
             <img src="{{ url('storage/images/images.png') }}" alt="Logo Perusahaan" width="100"
                 style="float: left; margin-right: 20px;">
             {{-- <div> --}}
-            <h2 class="has-text-weight-bold" style="padding: 0px; margin: 0px; text-align: center">
-                PT Sinar Bahagia
+            <h2 class="has-text-weight-bold is-size-3" style="padding: 0px; margin: 0px; text-align: center">
+                PT Sinar Bahagia Group
             </h2>
             <p style="text-align: center">
                 Jl. WR. Supratman No.1, Air Raja, Kec. Tanjungpinang Timur, Kota Tanjung Pinang,
@@ -134,18 +134,37 @@
                                     <th>Nama Kriteria</th>
                                     <th>Bobot</th>
                                     <th>Poin</th>
+                                    <th>Hasil</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $total = 0;
+                                @endphp
                                 @foreach ($bobot as $item)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $item->nama }} ({{ $item->tipe }})</td>
+                                        <td>{{ $item->nama }}</td>
                                         <td>{{ $item->bobot }}</td>
                                         <td>{{ $datapoin[$loop->index] }}</td>
+                                        <td>{{ ($item->bobot / 100) * $datapoin[$loop->index] }}</td>
                                     </tr>
+                                    @php
+                                        $total += ($item->bobot / 100) * $datapoin[$loop->index];
+                                    @endphp
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="has-text-weight-bold" colspan="4">
+                                        Nilai Total
+                                    </td>
+                                    <td>
+
+                                        {{ $total }}
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

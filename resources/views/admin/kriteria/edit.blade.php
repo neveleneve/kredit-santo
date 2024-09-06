@@ -41,7 +41,7 @@
                                 </div>
                                 @if ($total == 0)
                                     <p>
-                                        Total bobot untuk metode {{ strtoupper($kriteria->tipe) }} sudah 100!
+                                        Total bobot untuk metode {{ strtoupper($kriteria->tipe) }} sudah 100%!
                                     </p>
                                 @else
                                     <p>

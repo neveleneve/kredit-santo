@@ -5,10 +5,8 @@ namespace Database\Seeders;
 use App\Models\Rumah;
 use Illuminate\Database\Seeder;
 
-class RumahSeeder extends Seeder
-{
-    public function run()
-    {
+class RumahSeeder extends Seeder {
+    public function run() {
         for ($i = 0; $i < 50; $i++) {
             Rumah::create([
                 'nama' => 'Perum. Anjani Blok A No. ' . $i + 1,
@@ -16,12 +14,12 @@ class RumahSeeder extends Seeder
                 'tipe_rumah' => '36/100',
                 'harga' => '175000000',
                 'detail' => 'Rumah tipe 36 pada Perum. Anjani Blok A No. ' . $i + 1,
+                'village_id' => '2172020002',
             ]);
         }
     }
 
-    public function rumahNumber($length = 10)
-    {
+    public function rumahNumber($length = 10) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $code = '';
         for ($i = 0; $i < $length; $i++) {
@@ -30,8 +28,7 @@ class RumahSeeder extends Seeder
         return $code;
     }
 
-    public function checkrumahNumber()
-    {
+    public function checkrumahNumber() {
         $code = $this->rumahNumber();
         $data = Rumah::where('rumah_code', $code)->count();
         $verifiedcode = null;

@@ -3,8 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\District;
-use App\Models\Kecamatan;
-use App\Models\Kelurahan;
 use App\Models\Nasabah;
 use App\Models\Province;
 use App\Models\Regency;

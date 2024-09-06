@@ -88,7 +88,7 @@
                             <td>{{ ($penilaian->currentPage() - 1) * $penilaian->perPage() + $loop->index + 1 }}</td>
                             <td>{{ $item->nasabah->nama }}</td>
                             <td>{{ $item->rumah->rumah_code }}</td>
-                            <td> {{ $item->nilai_mfep }}
+                            <td> {{ $item->nilai }}
                             </td>
                             <td>{{ $item->status ? 'Lolos Kelayakan' : 'Tidak Lolos Kelayakan' }}</td>
                             <td class="has-text-centered">

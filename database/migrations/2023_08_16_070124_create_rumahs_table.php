@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRumahsTable extends Migration
-{
+class CreateRumahsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('rumahs', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
@@ -20,6 +18,7 @@ class CreateRumahsTable extends Migration
             $table->string('tipe_rumah');
             $table->integer('harga');
             $table->string('detail');
+            $table->string('village_id');
             // status value
             // 0 tidak tersedia / terjual
             // 1 dalam penawaran
@@ -35,8 +34,7 @@ class CreateRumahsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('rumahs');
     }
 }

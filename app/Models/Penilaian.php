@@ -5,28 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Penilaian extends Model
-{
+class Penilaian extends Model {
     use HasFactory;
 
     protected $fillable = [
         'nasabah_id',
         'rumah_id',
-        'dp',
-        'tenor',
-        'bi_checking',
-        'nilai_mfep',
-        'nilai_wp',
+        'nilai',
         'status',
     ];
 
-    public function nasabah()
-    {
+    public function nasabah() {
         return $this->belongsTo(Nasabah::class);
     }
 
-    public function rumah()
-    {
+    public function rumah() {
         return $this->belongsTo(Rumah::class);
     }
 }

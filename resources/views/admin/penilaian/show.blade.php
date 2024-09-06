@@ -53,9 +53,33 @@
                                                 <td>{{ $penilaian->nasabah->detailNasabah->kontak }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="has-text-weight-bold">Status Kawin</td>
+                                                <td class="has-text-weight-bold">Status Nikah</td>
                                                 <td>
-                                                    {{ ucwords($penilaian->nasabah->detailNasabah->status_pernikahan) }}
+                                                    {{ $penilaian->nasabah->detailNasabah->status_pernikahan == 2 ? 'Menikah' : 'Belum Menikah' }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Provinsi</td>
+                                                <td>
+                                                    {{ ucwords(strtolower($penilaian->nasabah->village->district->regency->province->name)) }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Kota/Kabupaten</td>
+                                                <td>
+                                                    {{ ucwords(strtolower($penilaian->nasabah->village->district->regency->name)) }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Kecamatan</td>
+                                                <td>
+                                                    {{ ucwords(strtolower($penilaian->nasabah->village->district->name)) }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Kelurahan</td>
+                                                <td>
+                                                    {{ ucwords(strtolower($penilaian->nasabah->village->name)) }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -64,18 +88,12 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="has-text-weight-bold">Nama Pekerjaan</td>
+                                                <td class="has-text-weight-bold">Status Pekerjaan</td>
                                                 <td>
-                                                    @if ($penilaian->nasabah->detailNasabah->pekerjaan == 100)
-                                                        Aparatur Sipil Negara / Tentara
-                                                    @elseif ($penilaian->nasabah->detailNasabah->pekerjaan == 75)
-                                                        Pengusaha / Wiraswasta
-                                                    @elseif ($penilaian->nasabah->detailNasabah->pekerjaan == 50)
-                                                        Karyawan Swasta (Tetap)
-                                                    @elseif ($penilaian->nasabah->detailNasabah->pekerjaan == 20)
-                                                        Karyawan Swasta (Lepas)
-                                                    @elseif ($penilaian->nasabah->detailNasabah->pekerjaan == 0)
-                                                        Tidak Bekerja
+                                                    @if ($penilaian->nasabah->detailNasabah->pekerjaan == 2)
+                                                        Tetap
+                                                    @elseif ($penilaian->nasabah->detailNasabah->pekerjaan == 1)
+                                                        Tidak Tetap
                                                     @else
                                                         -
                                                     @endif
@@ -84,91 +102,51 @@
                                             <tr>
                                                 <td class="has-text-weight-bold">Rentang Gaji</td>
                                                 <td>
-                                                    @if ($penilaian->nasabah->detailNasabah->gaji == 30)
-                                                        Dibawah Rp 2.000.000
-                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 50)
-                                                        Rp 2.000.000 - Rp 3.499.000
-                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 60)
-                                                        Rp 3.500.000 - Rp 4.999.000
-                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 80)
-                                                        Rp 5.000.000 - Rp 7.000.000
-                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 100)
-                                                        Diatas Rp 7.000.000
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="has-text-weight-bold">Jumlah Tanggungan</td>
-                                                <td>
-                                                    @if ($penilaian->nasabah->detailNasabah->tanggungan == 20)
-                                                        Lebih dari 3 Orang
-                                                    @elseif ($penilaian->nasabah->detailNasabah->tanggungan == 40)
-                                                        3 Orang
-                                                    @elseif ($penilaian->nasabah->detailNasabah->tanggungan == 60)
-                                                        2 Orang
-                                                    @elseif ($penilaian->nasabah->detailNasabah->tanggungan == 80)
-                                                        1 Orang
-                                                    @elseif ($penilaian->nasabah->detailNasabah->tanggungan == 100)
-                                                        Tidak Ada Tanggungan
+                                                    @if ($penilaian->nasabah->detailNasabah->gaji == 3)
+                                                        Rp 1.000.000 - Rp 3.000.000
+                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 2)
+                                                        Diatas Rp 3.000.000 - Rp 7.000.000
+                                                    @elseif ($penilaian->nasabah->detailNasabah->gaji == 1)
+                                                        Diatas Rp 7.000.000 - Rp 9.000.000
                                                     @endif
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="has-text-weight-bold is-dark">
-                                                    @if ($penilaian->nasabah->detailNasabah->status_pernikahan == 'kawin')
-                                                        Data Pasangan Nasabah
+                                                    Data Aset Nasabah
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="has-text-weight-bold">Aset Rumah</td>
+                                                <td>
+                                                    @if ($penilaian->nasabah->detailNasabah->aset_rumah == 4)
+                                                        TIdak Punya
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_rumah == 3)
+                                                        Mengontrak
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_rumah == 2)
+                                                        Punya Rumah
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_rumah == 1)
+                                                        Punya Rumah Lebih Dari 1
                                                     @else
-                                                        Data Penjamin Nasabah
+                                                        -
                                                     @endif
                                                 </td>
                                             </tr>
-                                            @if ($penilaian->nasabah->detailNasabah->status_pernikahan == 'kawin')
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Nama</td>
-                                                    <td>{{ $penilaian->nasabah->istri->nama }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Nomor Induk Kependudukan</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->istri->nik }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Kontak</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->istri->kontak }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Pekerjaan</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->istri->pekerjaan }}
-                                                    </td>
-                                                </tr>
-                                            @else
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Hubungan Dengan Nasabah</td>
-                                                    <td>{{ $penilaian->nasabah->penjamin->tipe_penjamin }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Nama</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->penjamin->nama }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Kontak</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->penjamin->kontak }}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="has-text-weight-bold">Alamat</td>
-                                                    <td>
-                                                        {{ $penilaian->nasabah->penjamin->alamat }}
-                                                    </td>
-                                                </tr>
-                                            @endif
+                                            <tr>
+                                                <td class="has-text-weight-bold">Aset Kendaraan</td>
+                                                <td>
+                                                    @if ($penilaian->nasabah->detailNasabah->aset_kendaraan == 4)
+                                                        Tidak Punya
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_kendaraan == 3)
+                                                        Sepeda
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_kendaraan == 2)
+                                                        Sepeda Motor
+                                                    @elseif ($penilaian->nasabah->detailNasabah->aset_kendaraan == 1)
+                                                        Mobil
+                                                    @endif
+                                                </td>
+                                            </tr>
+
                                             <tr>
                                                 <td colspan="2" class="has-text-weight-bold is-dark">
                                                     Data Rumah
@@ -199,46 +177,27 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" class="has-text-weight-bold is-dark">
-                                                    Data Keuangan Nasabah
+                                                <td class="has-text-weight-bold">Provinsi</td>
+                                                <td>
+                                                    {{ ucwords(strtolower($penilaian->rumah->village->district->regency->province->name)) }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="has-text-weight-bold">Tenor</td>
+                                                <td class="has-text-weight-bold">Kota/Kabupaten</td>
                                                 <td>
-                                                    {{ $penilaian->tenor }} Tahun
+                                                    {{ ucwords(strtolower($penilaian->rumah->village->district->regency->name)) }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="has-text-weight-bold">Down Payment</td>
+                                                <td class="has-text-weight-bold">Kecamatan</td>
                                                 <td>
-                                                    @if ($penilaian->dp == 20)
-                                                        Dibawah 15% dari harga
-                                                    @elseif ($penilaian->dp == 30)
-                                                        16% - 20% dari harga
-                                                    @elseif ($penilaian->dp == 40)
-                                                        21% - 25% dari harga
-                                                    @elseif ($penilaian->dp == 80)
-                                                        26% - 30% dari harga
-                                                    @elseif ($penilaian->dp == 100)
-                                                        Diatas 30% dari harga
-                                                    @endif
+                                                    {{ ucwords(strtolower($penilaian->rumah->village->district->name)) }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="has-text-weight-bold">BI Checking</td>
+                                                <td class="has-text-weight-bold">Kelurahan</td>
                                                 <td>
-                                                    @if ($penilaian->bi_checking == 20)
-                                                        Skor 5
-                                                    @elseif ($penilaian->bi_checking == 30)
-                                                        Skor 4
-                                                    @elseif ($penilaian->bi_checking == 40)
-                                                        Skor 3
-                                                    @elseif ($penilaian->bi_checking == 80)
-                                                        Skor 2
-                                                    @elseif ($penilaian->bi_checking == 100)
-                                                        Skor 1
-                                                    @endif
+                                                    {{ ucwords(strtolower($penilaian->rumah->village->name)) }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -249,7 +208,7 @@
                                             <tr>
                                                 <td class="has-text-weight-bold">Skor</td>
                                                 <td>
-                                                    {{ 0.6 * $penilaian->nilai_wp + 0.4 * $penilaian->nilai_mfep }}
+                                                    {{ $penilaian->nilai }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -272,19 +231,38 @@
                                                 <td class="is-dark has-text-weight-bold">Nama Kriteria</td>
                                                 <td class="is-dark has-text-weight-bold">Bobot</td>
                                                 <td class="is-dark has-text-weight-bold">Poin</td>
+                                                <td class="is-dark has-text-weight-bold">Jumlah</td>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $total = 0;
+                                            @endphp
                                             @forelse ($bobot as $item)
                                                 <tr>
                                                     <td>{{ $loop->index + 1 }}</td>
-                                                    <td>{{ $item->nama }} ({{ $item->tipe }})</td>
+                                                    <td>{{ $item->nama }} </td>
                                                     <td>{{ $item->bobot }}</td>
                                                     <td>{{ $datapoin[$loop->index] }}</td>
+                                                    <td>{{ ($item->bobot / 100) * $datapoin[$loop->index] }}</td>
+                                                    @php
+                                                        $total += ($item->bobot / 100) * $datapoin[$loop->index];
+                                                    @endphp
                                                 </tr>
                                             @empty
                                             @endforelse
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="has-text-weight-bold" colspan="4">
+                                                    Nilai Total
+                                                </td>
+                                                <td>
+
+                                                    {{ $total }}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
