@@ -27,142 +27,66 @@ class NasabahController extends Controller {
     }
 
     public function store(Request $request) {
-        dd($request->all());
-        $validasi = null;
-        if ($request->kawin == '2') {
-            $validasi = Validator::make($request->all(), [
-                'nama' => ['required'],
-                'kelamin' => ['required'],
-                'kawin' => ['required'],
-                'nik' => ['required', 'digits:16', 'unique:detail_nasabahs,nik'],
-                'no_kk' => ['required', 'digits:16'],
-                'ktp' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'kk' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'tempat_lahir' => ['required'],
-                'tanggal_lahir' => ['required', 'date'],
-                'usia' => ['required', 'gte:21'],
-                'kontak' => ['required', 'numeric'],
-                'alamat' => ['required'],
-                'kecamatan' => ['required', 'numeric'],
-                'kelurahan' => ['required', 'numeric'],
-                'pekerjaan' => ['required', 'numeric'],
-                'gaji' => ['required', 'numeric'],
-                'tanggungan' => ['required', 'numeric'],
-                // =================================================================================================
-                'nama_pasangan' => ['required'],
-                'nik_pasangan' => ['required', 'digits:16'],
-                'pekerjaan_pasangan' => ['required'],
-                'kontak_pasangan' => ['required', 'numeric'],
-            ], [
-                'nama.required' => 'Nama nasabah harus diisi!',
-                'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
-                'kawin.required' => 'Status kawin nasabah harus dipilih!',
-                'nik.required' => 'NIK nasabah harus diisi!',
-                'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
-                'nik.unique' => 'NIK nasabah sudah terdaftar!',
-                'no_kk.required' => 'Nomor KK nasabah harus diisi!',
-                'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                'ktp.required' => 'File foto KTP wajib dipilih!',
-                'ktp.image' => 'File yang dipilih harus berupa gambar!',
-                'ktp.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                'ktp.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                'kk.required' => 'File foto KK wajib dipilih!',
-                'kk.image' => 'File yang dipilih harus berupa gambar!',
-                'kk.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                'kk.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
-                'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
-                'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
-                'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
-                'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
-                'kontak.required' => 'Kontak nasabah harus diisi!',
-                'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
-                'alamat.required' => 'Alamat nasabah harus diisi!',
-                'kecamatan.required' => 'Kecamatan harus dipilih!',
-                'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
-                'kelurahan.required' => 'Kelurahan harus dipilih!',
-                'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
-                'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
-                'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
-                'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
-                'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
-                'tanggungan.required' => 'Jumlah tanggungan nasabah harus dipilih!',
-                'tanggungan.numeric' => 'Jumlah tanggungan nasabah harus diisi dengan angka!',
-                // =================================================================================================
-                'nama_pasangan.required' => 'Nama pasangan nasabah harus diisi!',
-                'nik_pasangan.required' => 'NIK pasangan nasabah harus diisi!',
-                'nik_pasangan.digits' => 'Jumlah angka NIK pasangan nasabah harus 16 digit!',
-                'pekerjaan_pasangan.required' => 'Pekerjaan pasangan nasabah harus diisi!',
-                'kontak_pasangan.required' => 'Kontak pasangan nasabah harus diisi!',
-                'kontak_pasangan.numeric' => 'Kontak pasangan nasabah harus diisi dengan angka!',
-            ]);
-        } else {
-            $validasi = Validator::make($request->all(), [
-                'nama' => ['required'],
-                'kelamin' => ['required'],
-                'kawin' => ['required'],
-                'nik' => ['required', 'digits:16', 'unique:detail_nasabahs,nik'],
-                'no_kk' => ['required', 'digits:16'],
-                'ktp' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'kk' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'tempat_lahir' => ['required'],
-                'tanggal_lahir' => ['required', 'date'],
-                'usia' => ['required', 'gte:21'],
-                'kontak' => ['required', 'numeric'],
-                'alamat' => ['required'],
-                'kecamatan' => ['required', 'numeric'],
-                'kelurahan' => ['required', 'numeric'],
-                'pekerjaan' => ['required', 'numeric'],
-                'gaji' => ['required', 'numeric'],
-                'tanggungan' => ['required', 'numeric'],
-                // =================================================================================================
-                'nama_penjamin' => ['required'],
-                'hubungan_penjamin' => ['required'],
-                'kontak_penjamin' => ['required', 'numeric'],
-                'alamat_penjamin' => ['required'],
-            ], [
-                'nama.required' => 'Nama nasabah harus diisi!',
-                'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
-                'kawin.required' => 'Status kawin nasabah harus dipilih!',
-                'nik.required' => 'NIK nasabah harus diisi!',
-                'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
-                'nik.unique' => 'NIK nasabah sudah terdaftar!',
-                'no_kk.required' => 'Nomor KK nasabah harus diisi!',
-                'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                'ktp.required' => 'File foto KTP wajib dipilih!',
-                'ktp.image' => 'File yang dipilih harus berupa gambar!',
-                'ktp.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                'ktp.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                'kk.required' => 'File foto KK wajib dipilih!',
-                'kk.image' => 'File yang dipilih harus berupa gambar!',
-                'kk.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                'kk.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
-                'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
-                'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
-                'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
-                'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
-                'kontak.required' => 'Kontak nasabah harus diisi!',
-                'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
-                'alamat.required' => 'Alamat nasabah harus diisi!',
-                'kecamatan.required' => 'Kecamatan harus dipilih!',
-                'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
-                'kelurahan.required' => 'Kelurahan harus dipilih!',
-                'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
-                'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
-                'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
-                'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
-                'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
-                'tanggungan.required' => 'Jumlah tanggungan nasabah harus dipilih!',
-                'tanggungan.numeric' => 'Jumlah tanggungan nasabah harus diisi dengan angka!',
-                // =================================================================================================
-                'nama_penjamin.required' => 'Nama penjamin nasabah harus diisi!',
-                'hubungan_penjamin.required' => 'Hubungan penjamin nasabah harus diisi!',
-                'kontak_penjamin.required' => 'Kontak penjamin nasabah harus diisi!',
-                'kontak_penjamin.numeric' => 'Kontak penjamin nasabah harus diisi dengan angka!',
-                'alamat_penjamin.required' => 'Alamat penjamin nasabah harus diisi!',
-            ]);
-        }
+        // dd($request->all());
+        $validasi = Validator::make($request->all(), [
+            'nama' => ['required'],
+            'kelamin' => ['required'],
+            'kawin' => ['required'],
+            'nik' => ['required', 'digits:16', 'unique:detail_nasabahs,nik'],
+            'no_kk' => ['required', 'digits:16'],
+            'ktp' => ['required', 'image', 'max:1024', 'mimes:png'],
+            'kk' => ['required', 'image', 'max:1024', 'mimes:png'],
+            'tempat_lahir' => ['required'],
+            'tanggal_lahir' => ['required', 'date'],
+            'usia' => ['required', 'gte:21'],
+            'kontak' => ['required', 'numeric'],
+            'alamat' => ['required'],
+            'kecamatan' => ['required', 'numeric'],
+            'kelurahan' => ['required', 'numeric'],
+            'pekerjaan' => ['required', 'numeric'],
+            'gaji' => ['required', 'numeric'],
+            'rumah' => ['required', 'numeric'],
+            'kendaraan' => ['required', 'numeric'],
+
+        ], [
+            'nama.required' => 'Nama nasabah harus diisi!',
+            'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
+            'kawin.required' => 'Status kawin nasabah harus dipilih!',
+            'nik.required' => 'NIK nasabah harus diisi!',
+            'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
+            'nik.unique' => 'NIK nasabah sudah terdaftar!',
+            'no_kk.required' => 'Nomor KK nasabah harus diisi!',
+            'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
+            'ktp.required' => 'File foto KTP wajib dipilih!',
+            'ktp.image' => 'File yang dipilih harus berupa gambar!',
+            'ktp.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
+            'ktp.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
+            'kk.required' => 'File foto KK wajib dipilih!',
+            'kk.image' => 'File yang dipilih harus berupa gambar!',
+            'kk.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
+            'kk.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
+            'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
+            'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
+            'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
+            'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
+            'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
+            'kontak.required' => 'Kontak nasabah harus diisi!',
+            'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
+            'alamat.required' => 'Alamat nasabah harus diisi!',
+            'kecamatan.required' => 'Kecamatan harus dipilih!',
+            'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
+            'kelurahan.required' => 'Kelurahan harus dipilih!',
+            'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
+            'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
+            'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
+            'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
+            'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
+            'rumah.required' => 'Aset rumah nasabah harus dipilih!',
+            'rumah.numeric' => 'Aset rumah nasabah harus diisi dengan angka!',
+            'kendaraan.required' => 'Aset kendaraan nasabah harus dipilih!',
+            'kendaraan.numeric' => 'Aset kendaraan nasabah harus diisi dengan angka!',
+        ]);
+
 
         if ($validasi->fails()) {
             return redirect(route('nasabah.create'))
@@ -185,31 +109,9 @@ class NasabahController extends Controller {
                 'status_pernikahan' => $request->kawin,
                 'pekerjaan' => $request->pekerjaan,
                 'gaji' => $request->gaji,
-                'tanggungan' => $request->tanggungan,
+                'aset_rumah' => $request->rumah,
+                'aset_kendaraan' => $request->kendaraan,
             ]);
-            if ($request->kawin == '2') {
-                Istri::create([
-                    'nasabah_id' => $nasabah->id,
-                    'nama' => $request->nama_pasangan,
-                    'kontak' => $request->kontak_pasangan,
-                    'nik' => $request->nik_pasangan,
-                    'pekerjaan' => $request->pekerjaan_pasangan,
-                ]);
-                Penjamin::create([
-                    'nasabah_id' => $nasabah->id,
-                ]);
-            } else {
-                Istri::create([
-                    'nasabah_id' => $nasabah->id,
-                ]);
-                Penjamin::create([
-                    'nasabah_id' => $nasabah->id,
-                    'tipe_penjamin' => $request->hubungan_penjamin,
-                    'nama' => $request->nama_penjamin,
-                    'kontak' => $request->kontak_penjamin,
-                    'alamat' => $request->alamat_penjamin,
-                ]);
-            }
 
             $kk = $request->file('kk');
             $ktp = $request->file('ktp');
@@ -235,122 +137,55 @@ class NasabahController extends Controller {
     public function update(Request $request, Nasabah $nasabah) {
         // dd([$request->all(), $nasabah]);
         $validasi = null;
-        if ($request->kawin == '2') {
-            $validasi = Validator::make($request->all(), [
-                'nama' => ['required'],
-                'kelamin' => ['required'],
-                'kawin' => ['required'],
-                'nik' => ['required', 'digits:16', Rule::unique('detail_nasabahs')->ignore($nasabah->id, 'nasabah_id')],
-                'no_kk' => ['required', 'digits:16'],
-                // 'ktp' => ['required', 'image', 'max:1024', 'mimes:png'],
-                // 'kk' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'tempat_lahir' => ['required'],
-                'tanggal_lahir' => ['required', 'date'],
-                'usia' => ['required', 'gte:21'],
-                'kontak' => ['required', 'numeric'],
-                'alamat' => ['required'],
-                'kecamatan' => ['required', 'numeric'],
-                'kelurahan' => ['required', 'numeric'],
-                'pekerjaan' => ['required', 'numeric'],
-                'gaji' => ['required', 'numeric'],
-                'tanggungan' => ['required', 'numeric'],
-                // =================================================================================================
-                'nama_pasangan' => ['required'],
-                'nik_pasangan' => ['required', 'digits:16'],
-                'pekerjaan_pasangan' => ['required'],
-                'kontak_pasangan' => ['required', 'numeric'],
-            ], [
-                'nama.required' => 'Nama nasabah harus diisi!',
-                'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
-                'kawin.required' => 'Status kawin nasabah harus dipilih!',
-                'nik.required' => 'NIK nasabah harus diisi!',
-                'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
-                'no_kk.required' => 'Nomor KK nasabah harus diisi!',
-                'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
-                'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
-                'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
-                'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
-                'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
-                'kontak.required' => 'Kontak nasabah harus diisi!',
-                'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
-                'alamat.required' => 'Alamat nasabah harus diisi!',
-                'kecamatan.required' => 'Kecamatan harus dipilih!',
-                'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
-                'kelurahan.required' => 'Kelurahan harus dipilih!',
-                'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
-                'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
-                'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
-                'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
-                'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
-                'tanggungan.required' => 'Jumlah tanggungan nasabah harus dipilih!',
-                'tanggungan.numeric' => 'Jumlah tanggungan nasabah harus diisi dengan angka!',
-                // =================================================================================================
-                'nama_pasangan.required' => 'Nama pasangan nasabah harus diisi!',
-                'nik_pasangan.required' => 'NIK pasangan nasabah harus diisi!',
-                'nik_pasangan.digits' => 'Jumlah angka NIK pasangan nasabah harus 16 digit!',
-                'pekerjaan_pasangan.required' => 'Pekerjaan pasangan nasabah harus diisi!',
-                'kontak_pasangan.required' => 'Kontak pasangan nasabah harus diisi!',
-                'kontak_pasangan.numeric' => 'Kontak pasangan nasabah harus diisi dengan angka!',
-            ]);
-        } else {
-            $validasi = Validator::make($request->all(), [
-                'nama' => ['required'],
-                'kelamin' => ['required'],
-                'kawin' => ['required'],
-                'nik' => ['required', 'digits:16', Rule::unique('detail_nasabahs')->ignore($nasabah->id, 'nasabah_id')],
-                'no_kk' => ['required', 'digits:16'],
-                // 'ktp' => ['required', 'image', 'max:1024', 'mimes:png'],
-                // 'kk' => ['required', 'image', 'max:1024', 'mimes:png'],
-                'tempat_lahir' => ['required'],
-                'tanggal_lahir' => ['required', 'date'],
-                'usia' => ['required', 'gte:21'],
-                'kontak' => ['required', 'numeric'],
-                'alamat' => ['required'],
-                'kecamatan' => ['required', 'numeric'],
-                'kelurahan' => ['required', 'numeric'],
-                'pekerjaan' => ['required', 'numeric'],
-                'gaji' => ['required', 'numeric'],
-                'tanggungan' => ['required', 'numeric'],
-                // =================================================================================================
-                'nama_penjamin' => ['required'],
-                'hubungan_penjamin' => ['required'],
-                'kontak_penjamin' => ['required', 'numeric'],
-                'alamat_penjamin' => ['required'],
-            ], [
-                'nama.required' => 'Nama nasabah harus diisi!',
-                'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
-                'kawin.required' => 'Status kawin nasabah harus dipilih!',
-                'nik.required' => 'NIK nasabah harus diisi!',
-                'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
-                'no_kk.required' => 'Nomor KK nasabah harus diisi!',
-                'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
-                'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
-                'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
-                'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
-                'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
-                'kontak.required' => 'Kontak nasabah harus diisi!',
-                'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
-                'alamat.required' => 'Alamat nasabah harus diisi!',
-                'kecamatan.required' => 'Kecamatan harus dipilih!',
-                'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
-                'kelurahan.required' => 'Kelurahan harus dipilih!',
-                'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
-                'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
-                'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
-                'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
-                'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
-                'tanggungan.required' => 'Jumlah tanggungan nasabah harus dipilih!',
-                'tanggungan.numeric' => 'Jumlah tanggungan nasabah harus diisi dengan angka!',
-                // =================================================================================================
-                'nama_penjamin.required' => 'Nama penjamin nasabah harus diisi!',
-                'hubungan_penjamin.required' => 'Hubungan penjamin nasabah harus diisi!',
-                'kontak_penjamin.required' => 'Kontak penjamin nasabah harus diisi!',
-                'kontak_penjamin.numeric' => 'Kontak penjamin nasabah harus diisi dengan angka!',
-                'alamat_penjamin.required' => 'Alamat penjamin nasabah harus diisi!',
-            ]);
-        }
+        $validasi = Validator::make($request->all(), [
+            'nama' => ['required'],
+            'kelamin' => ['required'],
+            'kawin' => ['required'],
+            'nik' => ['required', 'digits:16', 'unique:detail_nasabahs,nik'],
+            'no_kk' => ['required', 'digits:16'],
+            'tempat_lahir' => ['required'],
+            'tanggal_lahir' => ['required', 'date'],
+            'usia' => ['required', 'gte:21'],
+            'kontak' => ['required', 'numeric'],
+            'alamat' => ['required'],
+            'kecamatan' => ['required', 'numeric'],
+            'kelurahan' => ['required', 'numeric'],
+            'pekerjaan' => ['required', 'numeric'],
+            'gaji' => ['required', 'numeric'],
+            'rumah' => ['required', 'numeric'],
+            'kendaraan' => ['required', 'numeric'],
+
+        ], [
+            'nama.required' => 'Nama nasabah harus diisi!',
+            'kelamin.required' => 'Jenis kelamin nasabah harus dipilih!',
+            'kawin.required' => 'Status kawin nasabah harus dipilih!',
+            'nik.required' => 'NIK nasabah harus diisi!',
+            'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
+            'nik.unique' => 'NIK nasabah sudah terdaftar!',
+            'no_kk.required' => 'Nomor KK nasabah harus diisi!',
+            'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
+            'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
+            'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
+            'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
+            'usia.required' => 'Usia nasabah harus diisi dengan memilih tanggal lahir nasabah!',
+            'usia.gte' => 'Usia nasabah harus lebih atau sama dengan 21 tahun!',
+            'kontak.required' => 'Kontak nasabah harus diisi!',
+            'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
+            'alamat.required' => 'Alamat nasabah harus diisi!',
+            'kecamatan.required' => 'Kecamatan harus dipilih!',
+            'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
+            'kelurahan.required' => 'Kelurahan harus dipilih!',
+            'kelurahan.numeric' => 'Kelurahan harus diisi dengan angka!',
+            'pekerjaan.required' => 'Pekerjaan nasabah harus dipilih!',
+            'pekerjaan.numeric' => 'Pekerjaan nasabah harus diisi dengan angka!',
+            'gaji.required' => 'Rentang gaji nasabah harus dipilih!',
+            'gaji.numeric' => 'Rentang gaji nasabah harus diisi dengan angka!',
+            'rumah.required' => 'Aset rumah nasabah harus dipilih!',
+            'rumah.numeric' => 'Aset rumah nasabah harus diisi dengan angka!',
+            'kendaraan.required' => 'Aset kendaraan nasabah harus dipilih!',
+            'kendaraan.numeric' => 'Aset kendaraan nasabah harus diisi dengan angka!',
+
+        ]);
 
         if ($validasi->fails()) {
             return redirect(route('nasabah.edit', ['nasabah' => $nasabah->id]))
@@ -372,66 +207,9 @@ class NasabahController extends Controller {
                 'status_pernikahan' => $request->kawin,
                 'pekerjaan' => $request->pekerjaan,
                 'gaji' => $request->gaji,
-                'tanggungan' => $request->tanggungan,
+                'aset_rumah' => $request->rumah,
+                'aset_kendaraan' => $request->kendaraan,
             ]);
-
-            if ($request->kawin == 'kawin') {
-                if ($nasabah->detailNasabah->status_pernikahan == $request->kawin) {
-                    Istri::where('nasabah_id', $nasabah->id)->update([
-                        'nama' => $request->nama_pasangan,
-                        'kontak' => $request->kontak_pasangan,
-                        'nik' => $request->nik_pasangan,
-                        'pekerjaan' => $request->pekerjaan_pasangan,
-                    ]);
-                    Penjamin::where('nasabah_id', $nasabah->id)->update([
-                        'tipe_penjamin' => null,
-                        'nama' => null,
-                        'kontak' => null,
-                        'alamat' => null,
-                    ]);
-                } else {
-                    Istri::where('nasabah_id', $nasabah->id)->update([
-                        'nama' => null,
-                        'kontak' => null,
-                        'nik' => null,
-                        'pekerjaan' => null,
-                    ]);
-                    Penjamin::where('nasabah_id', $nasabah->id)->update([
-                        'tipe_penjamin' => $request->hubungan_penjamin,
-                        'nama' => $request->nama_penjamin,
-                        'kontak' => $request->kontak_penjamin,
-                        'alamat' => $request->alamat_penjamin,
-                    ]);
-                }
-            } else {
-                if ($nasabah->detailNasabah->status_pernikahan == $request->kawin) {
-                    Istri::where('nasabah_id', $nasabah->id)->update([
-                        'nama' => null,
-                        'kontak' => null,
-                        'nik' => null,
-                        'pekerjaan' => null,
-                    ]);
-                    Penjamin::where('nasabah_id', $nasabah->id)->update([
-                        'tipe_penjamin' => $request->hubungan_penjamin,
-                        'nama' => $request->nama_penjamin,
-                        'kontak' => $request->kontak_penjamin,
-                        'alamat' => $request->alamat_penjamin,
-                    ]);
-                } else {
-                    Istri::where('nasabah_id', $nasabah->id)->update([
-                        'nama' => $request->nama_pasangan,
-                        'kontak' => $request->kontak_pasangan,
-                        'nik' => $request->nik_pasangan,
-                        'pekerjaan' => $request->pekerjaan_pasangan,
-                    ]);
-                    Penjamin::where('nasabah_id', $nasabah->id)->update([
-                        'tipe_penjamin' => null,
-                        'nama' => null,
-                        'kontak' => null,
-                        'alamat' => null,
-                    ]);
-                }
-            }
 
             return redirect(route('nasabah.index'))->with([
                 'color' => 'success',

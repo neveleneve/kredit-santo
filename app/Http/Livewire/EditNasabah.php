@@ -25,7 +25,6 @@ class EditNasabah extends Component {
     public $datakelurahan;
     public $kelurahan;
 
-    public $statusnikah;
     public $tanggallahir;
     public $usia;
     public $cond;
@@ -37,8 +36,6 @@ class EditNasabah extends Component {
     public function mount() {
         $datanasabah = Nasabah::with(
             'detailNasabah',
-            'istri',
-            'penjamin',
             'village',
             'village.district',
             'village.district.regency',
@@ -59,7 +56,6 @@ class EditNasabah extends Component {
         $this->kelurahan = $datanasabah->village_id;
 
         $this->tanggallahir = $datanasabah->detailNasabah->tanggal_lahir;
-        $this->statusnikah = $datanasabah->detailNasabah->status_pernikahan;
         $this->usiaCount();
     }
 

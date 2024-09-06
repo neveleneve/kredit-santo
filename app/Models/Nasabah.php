@@ -19,14 +19,6 @@ class Nasabah extends Model {
         return $this->hasOne(DetailNasabah::class);
     }
 
-    // public function istri() {
-    //     return $this->hasOne(Istri::class);
-    // }
-
-    // public function penjamin() {
-    //     return $this->hasOne(Penjamin::class);
-    // }
-
     public function penilaian() {
         return $this->hasOne(Penilaian::class);
     }
