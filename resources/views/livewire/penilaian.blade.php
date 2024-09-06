@@ -88,9 +88,7 @@
                             <td>{{ ($penilaian->currentPage() - 1) * $penilaian->perPage() + $loop->index + 1 }}</td>
                             <td>{{ $item->nasabah->nama }}</td>
                             <td>{{ $item->rumah->rumah_code }}</td>
-                            <td>WP : {{ $item->nilai_wp }}
-                                | MFEP : {{ $item->nilai_mfep }}
-                                | Result : {{ 0.6 * $item->nilai_wp + 0.4 * $item->nilai_mfep }}
+                            <td> {{ $item->nilai_mfep }}
                             </td>
                             <td>{{ $item->status ? 'Lolos Kelayakan' : 'Tidak Lolos Kelayakan' }}</td>
                             <td class="has-text-centered">
