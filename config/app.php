@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\DomPDF\ServiceProvider::class,
+        AzisHapidin\IndoRegion\IndoRegionServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DetailNasabah extends Model
-{
+class DetailNasabah extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -20,11 +19,11 @@ class DetailNasabah extends Model
         'status_pernikahan',
         'pekerjaan',
         'gaji',
-        'tanggungan',
+        'aset_rumah',
+        'aset_kendaraan',
     ];
 
-    public function nasabah()
-    {
+    public function nasabah() {
         return $this->belongsTo(Nasabah::class);
     }
 }

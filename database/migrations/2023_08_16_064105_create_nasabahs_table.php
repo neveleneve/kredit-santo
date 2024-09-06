@@ -4,20 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNasabahsTable extends Migration
-{
+class CreateNasabahsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('nasabahs', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('kelurahan_id');
+            $table->string('village_id');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -28,8 +26,7 @@ class CreateNasabahsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('nasabahs');
     }
 }

@@ -10,31 +10,26 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class NasabahController extends Controller
-{
-    public function __construct()
-    {
+class NasabahController extends Controller {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
         $nasabah = Nasabah::get();
         return view('admin.nasabah.index', [
             'nasabah' => $nasabah
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         return view('admin.nasabah.create');
     }
 
-    public function store(Request $request)
-    {
-        // dd($request->all());
+    public function store(Request $request) {
+        dd($request->all());
         $validasi = null;
-        if ($request->kawin == 'kawin') {
+        if ($request->kawin == '2') {
             $validasi = Validator::make($request->all(), [
                 'nama' => ['required'],
                 'kelamin' => ['required'],
@@ -174,11 +169,10 @@ class NasabahController extends Controller
                 ->withErrors($validasi)
                 ->withInput();
         } else {
-            // dd($request->all());
             $nasabah = Nasabah::create([
                 'nama' => $request->nama,
                 'alamat' => $request->alamat,
-                'kelurahan_id' => $request->kelurahan,
+                'village_id' => $request->kelurahan,
             ]);
             DetailNasabah::create([
                 'nasabah_id' => $nasabah->id,
@@ -193,7 +187,7 @@ class NasabahController extends Controller
                 'gaji' => $request->gaji,
                 'tanggungan' => $request->tanggungan,
             ]);
-            if ($request->kawin == 'kawin') {
+            if ($request->kawin == '2') {
                 Istri::create([
                     'nasabah_id' => $nasabah->id,
                     'nama' => $request->nama_pasangan,
@@ -231,19 +225,17 @@ class NasabahController extends Controller
         }
     }
 
-    public function edit(Nasabah $nasabah)
-    {
+    public function edit(Nasabah $nasabah) {
         return view('admin.nasabah.edit', [
             'nasabah' => $nasabah
         ]);
     }
 
 
-    public function update(Request $request, Nasabah $nasabah)
-    {
+    public function update(Request $request, Nasabah $nasabah) {
         // dd([$request->all(), $nasabah]);
         $validasi = null;
-        if ($request->kawin == 'kawin') {
+        if ($request->kawin == '2') {
             $validasi = Validator::make($request->all(), [
                 'nama' => ['required'],
                 'kelamin' => ['required'],
@@ -275,14 +267,6 @@ class NasabahController extends Controller
                 'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
                 'no_kk.required' => 'Nomor KK nasabah harus diisi!',
                 'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                // 'ktp.required' => 'File foto KTP wajib dipilih!',
-                // 'ktp.image' => 'File yang dipilih harus berupa gambar!',
-                // 'ktp.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                // 'ktp.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                // 'kk.required' => 'File foto KK wajib dipilih!',
-                // 'kk.image' => 'File yang dipilih harus berupa gambar!',
-                // 'kk.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                // 'kk.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
                 'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
                 'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
                 'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
@@ -341,14 +325,6 @@ class NasabahController extends Controller
                 'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
                 'no_kk.required' => 'Nomor KK nasabah harus diisi!',
                 'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
-                // 'ktp.required' => 'File foto KTP wajib dipilih!',
-                // 'ktp.image' => 'File yang dipilih harus berupa gambar!',
-                // 'ktp.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                // 'ktp.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
-                // 'kk.required' => 'File foto KK wajib dipilih!',
-                // 'kk.image' => 'File yang dipilih harus berupa gambar!',
-                // 'kk.size' => 'File yang dipilih harus berukuran kurang dari 1 Mb!',
-                // 'kk.mimes' => 'File yang dipilih harus berupa gambar dengan format ".png"!',
                 'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
                 'tanggal_lahir.required' => 'Tanggal lahir nasabah harus diisi!',
                 'tanggal_lahir.date' => 'Tanggal lahir nasabah harus diisi dengan format penanggalan!',
@@ -381,11 +357,10 @@ class NasabahController extends Controller
                 ->withErrors($validasi)
                 ->withInput();
         } else {
-            // dd($request->all());
             $nasabah->update([
                 'nama' => $request->nama,
                 'alamat' => $request->alamat,
-                'kelurahan_id' => $request->kelurahan,
+                'village_id' => $request->kelurahan,
             ]);
             DetailNasabah::where('nasabah_id', $nasabah->id)->update([
                 'nik' => $request->nik,
@@ -466,8 +441,7 @@ class NasabahController extends Controller
     }
 
 
-    public function destroy(Nasabah $nasabah)
-    {
+    public function destroy(Nasabah $nasabah) {
         $nasabah->delete();
         return redirect(route('nasabah.index'))->with([
             'color' => 'success',

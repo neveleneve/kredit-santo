@@ -52,17 +52,11 @@
                     <div class="select is-fullwidth @error('kawin') is-danger @enderror">
                         <select id="kawin" name="kawin" wire:model='statusnikah'>
                             <option value="">Pilih Status Pernikahan</option>
-                            <option value="belum kawin">
-                                Belum Kawin
+                            <option value="1" {{ old('kawin') == '1' ? 'selected' : null }}>
+                                Belum Menikah
                             </option>
-                            <option value="kawin">
-                                Kawin
-                            </option>
-                            <option value="cerai hidup">
-                                Cerai Hidup
-                            </option>
-                            <option value="cerai mati">
-                                Cerai Mati
+                            <option value="2" {{ old('kawin') == '2' ? 'selected' : null }}>
+                                Menikah
                             </option>
                         </select>
                         @error('kawin')
@@ -230,17 +224,80 @@
     <div class="columns">
         <div class="column">
             <div class="field">
+                <label class="label" for="provinsi">Provinsi <span class="has-text-danger">*</span></label>
+                <div class="control @error('provinsi') has-icons-left @enderror">
+                    <div class="select is-fullwidth @error('provinsi') is-danger @enderror">
+                        <select id="provinsi" name="provinsi" wire:model='provinsi'>
+                            <option value="" hidden
+                                {{ old('provinsi') == '' || old('provinsi') == null ? 'selected' : null }}>
+                                Pilih Provinsi
+                            </option>
+                            @foreach ($dataprovinsi as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ old('provinsi') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('provinsi')
+                        <span class="icon is-small is-right has-text-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <span class="has-text-weight-bold has-text-danger">
+                            * {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="label" for="kotakab">Kota / Kabupaten <span class="has-text-danger">*</span></label>
+                <div class="control @error('kotakab') has-icons-left @enderror">
+                    <div class="select is-fullwidth  @error('kotakab') is-danger @enderror">
+                        <select id="kotakab" name="kotakab" wire:model='kotakab'
+                            {{ $provinsi == '' || $provinsi == null ? 'disabled' : null }}>
+                            <option value="" hidden
+                                {{ old('kotakab') == '' || old('kotakab') == null ? 'selected' : null }}>
+                                Pilih Kota / Kabupaten
+                            </option>
+                            @foreach ($datakotakab as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ old('kotakab') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('kelurahan')
+                        <span class="icon is-small is-right has-text-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <span class="has-text-weight-bold has-text-danger">
+                            * {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="field">
                 <label class="label" for="kecamatan">Kecamatan <span class="has-text-danger">*</span></label>
                 <div class="control @error('kecamatan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('kecamatan') is-danger @enderror">
-                        <select id="kecamatan" name="kecamatan" wire:model='kecamatan'>
-                            <option value="" {{ $kecamatan == '' || $kecamatan == null ? 'selected' : null }}>
+                        <select id="kecamatan" name="kecamatan" wire:model='kecamatan'
+                            {{ $kotakab == '' || $kotakab == null ? 'disabled' : null }}>
+                            <option value="" hidden
+                                {{ old('kecamatan') == '' || old('kecamatan') == null ? 'selected' : null }}>
                                 Pilih Kecamatan
                             </option>
                             @foreach ($datakecamatan as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $kecamatan == $item->id ? 'selected' : null }}>
-                                    {{ $item->nama }}
+                                    {{ old('kecamatan') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -263,13 +320,14 @@
                     <div class="select is-fullwidth  @error('kelurahan') is-danger @enderror">
                         <select id="kelurahan" name="kelurahan" wire:model='kelurahan'
                             {{ $kecamatan == '' || $kecamatan == null ? 'disabled' : null }}>
-                            <option value="" {{ $kelurahan == '' || $kelurahan == null ? 'selected' : null }}>
+                            <option value="" hidden
+                                {{ old('kelurahan') == '' || old('kelurahan') == null ? 'selected' : null }}>
                                 Pilih Kelurahan
                             </option>
                             @foreach ($datakelurahan as $item)
                                 <option value="{{ $item->id }}"
-                                    {{ $kelurahan == $item->id ? 'selected' : null }}>
-                                    {{ $item->nama }}
+                                    {{ old('kelurahan') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -415,7 +473,7 @@
         </div>
     </div>
     <hr>
-    @if ($statusnikah == 'kawin' && $statusnikah != '')
+    @if ($statusnikah == '2' && $statusnikah != '')
         {{-- data pasangan --}}
         <h3 class="has-text-weight-bold has-text-centered">Data Pasangan</h3>
         <hr>
@@ -499,7 +557,7 @@
             </div>
         </div>
         <hr>
-    @elseif ($statusnikah != 'kawin' && $statusnikah != '')
+    @elseif ($statusnikah != '2' && $statusnikah != '')
         {{-- data penjamin --}}
         <h3 class="has-text-weight-bold has-text-centered">Data Penjamin</h3>
         <hr>
@@ -600,4 +658,7 @@
         </div>
         <hr>
     @endif
+    <pre>
+        {{ print_r([$provinsi, $kotakab, $kecamatan, $kelurahan, $cond]) }}
+    </pre>
 </div>

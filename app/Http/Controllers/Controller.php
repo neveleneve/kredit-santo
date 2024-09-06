@@ -10,12 +10,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-class Controller extends BaseController
-{
+class Controller extends BaseController {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function randNumber($length = 10, $charstate = 'number')
-    {
+    public function randNumber($length = 10, $charstate = 'number') {
         if ($charstate == 'number') {
             $characters = '0123456789';
         } else  if ($charstate == 'alpha') {
@@ -32,8 +30,7 @@ class Controller extends BaseController
         return $code;
     }
 
-    public function checkRumahCode()
-    {
+    public function checkRumahCode() {
         $code = $this->randNumber(10, 'alpha_numeric');
         $data = Rumah::where('rumah_code', $code)
             ->count();
@@ -52,8 +49,7 @@ class Controller extends BaseController
         return $verifiedcode;
     }
     // wp
-    public function vectorS($c, $w)
-    {
+    public function vectorS($c, $w) {
         $s = 0;
         for ($i = 0; $i < count($c); $i++) {
             $s += number_format(pow($c[$i], $w[$i]), 3, '.', ',');
@@ -61,25 +57,24 @@ class Controller extends BaseController
         return number_format($s, 3, '.', ',');
     }
 
-    public function hitungWP($data)
-    {
-        $bobot = KriteriaBobot::where('tipe', 'wp')
-            ->orderBy('id')
-            ->get('bobot');
-        $totalbobot = KriteriaBobot::where('tipe', 'wp')
-            ->sum('bobot');
+    // public function hitungWP($data)
+    // {
+    //     $bobot = KriteriaBobot::where('tipe', 'wp')
+    //         ->orderBy('id')
+    //         ->get('bobot');
+    //     $totalbobot = KriteriaBobot::where('tipe', 'wp')
+    //         ->sum('bobot');
 
-        for ($i = 0; $i < count($bobot); $i++) {
-            $w[$i] = number_format($bobot[$i]->bobot / $totalbobot, 3, '.', ',');
-        }
+    //     for ($i = 0; $i < count($bobot); $i++) {
+    //         $w[$i] = number_format($bobot[$i]->bobot / $totalbobot, 3, '.', ',');
+    //     }
 
-        $nilai = $this->vectorS($data, $w);
-        return $nilai;
-    }
+    //     $nilai = $this->vectorS($data, $w);
+    //     return $nilai;
+    // }
 
     // mfep
-    public function hitungMFEP($data)
-    {
+    public function hitungMFEP($data) {
         // $weight =
         $bobot = KriteriaBobot::where('tipe', 'mfep')
             ->orderBy('id')

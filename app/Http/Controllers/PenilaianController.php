@@ -65,13 +65,13 @@ class PenilaianController extends Controller {
         } else {
             $nasabah = Nasabah::with('detailNasabah')->find($request->nasabah);
             // dd($nasabah);
-            $datawp = [
-                0 => $request->bi, // bi checking (karakter)
-                1 => $request->dp, // uang dp (kapital)
-                2 => $nasabah->detailNasabah->gaji, // gaji (kapasitas)
-                3 => $nasabah->detailNasabah->pekerjaan, // pekerjaan (jaminan)
-                4 => $nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
-            ];
+            // $datawp = [
+            //     0 => $request->bi, // bi checking (karakter)
+            //     1 => $request->dp, // uang dp (kapital)
+            //     2 => $nasabah->detailNasabah->gaji, // gaji (kapasitas)
+            //     3 => $nasabah->detailNasabah->pekerjaan, // pekerjaan (jaminan)
+            //     4 => $nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
+            // ];
             $datamfep = [
                 0 => $request->bi, // bi checking (karakter)
                 1 => $nasabah->detailNasabah->pekerjaan, // pekerjaan (kapasitas)
@@ -79,9 +79,9 @@ class PenilaianController extends Controller {
                 3 => $nasabah->detailNasabah->tanggungan, // tanggungan (kondisi)
             ];
             // dd($datawp);
-            $nilaiwp = $this->hitungWP($datawp);
+            // $nilaiwp = $this->hitungWP($datawp);
             $nilaimfep = $this->hitungMFEP($datamfep);
-            $kombinasi   = 0.6 * $nilaiwp + 0.4 * $nilaimfep;
+            $kombinasi  =  $nilaimfep;
 
             // dd([$nilaiwp, $nilaimfep, $kombinasi]);
             // ubah sesuai dengan kebutuhan di dokumen 
@@ -99,7 +99,7 @@ class PenilaianController extends Controller {
                 'dp' => $request->dp,
                 'tenor' => $request->tenor,
                 'bi_checking' => $request->bi,
-                'nilai_wp' => $nilaiwp,
+                // 'nilai_wp' => $nilaiwp,
                 'nilai_mfep' => $nilaimfep,
                 'status' => $status,
             ]);

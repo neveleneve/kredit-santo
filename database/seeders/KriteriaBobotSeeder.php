@@ -14,50 +14,34 @@ class KriteriaBobotSeeder extends Seeder {
     public function run() {
         // mfep
         KriteriaBobot::create([
-            'nama' => 'Karakter',
-            'bobot' => 35,
-            'tipe' => 'mfep',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kapasitas',
-            'bobot' => 25,
-            'tipe' => 'mfep',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Pendapatan',
-            'bobot' => 25,
-            'tipe' => 'mfep',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kondisi',
-            'bobot' => 15,
-            'tipe' => 'mfep',
-        ]);
-        // wp
-        KriteriaBobot::create([
-            'nama' => 'Karakter',
-            'bobot' => 35,
-            'tipe' => 'wp',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kapital (Uang Muka)',
-            'bobot' => 15,
-            'tipe' => 'wp',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kapasitas (Kemampuan)',
-            'bobot' => 20,
-            'tipe' => 'wp',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kolateral (Jaminan)',
-            'bobot' => 20,
-            'tipe' => 'wp',
-        ]);
-        KriteriaBobot::create([
-            'nama' => 'Kondisi (Tanggungan)',
+            'nama' => 'Domisili Warga',
             'bobot' => 10,
-            'tipe' => 'wp',
+            'tipe' => 'mfep',
+        ]);
+        KriteriaBobot::create([
+            'nama' => 'Status Pekerjaan',
+            'bobot' => 30,
+            'tipe' => 'mfep',
+        ]);
+        KriteriaBobot::create([
+            'nama' => 'Besar Penghasilan',
+            'bobot' => 20,
+            'tipe' => 'mfep',
+        ]);
+        KriteriaBobot::create([
+            'nama' => 'Kepemilikan Rumah',
+            'bobot' => 20,
+            'tipe' => 'mfep',
+        ]);
+        KriteriaBobot::create([
+            'nama' => 'Kepemilikan Kendaraan',
+            'bobot' => 10,
+            'tipe' => 'mfep',
+        ]);
+        KriteriaBobot::create([
+            'nama' => 'Status Pernikahan',
+            'bobot' => 10,
+            'tipe' => 'mfep',
         ]);
     }
 }

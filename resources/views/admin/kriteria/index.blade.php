@@ -16,7 +16,7 @@
                                 <th class="is-dark">#</th>
                                 <th class="is-dark">Nama Kriteria</th>
                                 <th class="is-dark">Bobot</th>
-                                <th class="is-dark">Tipe</th>
+                                {{-- <th class="is-dark">Tipe</th> --}}
                                 <th class="is-dark">Aksi</th>
                             </tr>
                         </thead>
@@ -26,7 +26,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->bobot }}</td>
-                                    <td>{{ $item->tipe }}</td>
+                                    {{-- <td>{{ $item->tipe }}</td> --}}
                                     <td class="has-text-centered">
                                         <a class="button is-primary is-small has-text-weight-bold"
                                             href="{{ route('kriteria-bobot.edit', ['kriteria_bobot' => $item->id]) }}">

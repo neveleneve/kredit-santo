@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailNasabahsTable extends Migration
-{
+class CreateDetailNasabahsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('detail_nasabahs', function (Blueprint $table) {
             $table->id();
             $table->string('nasabah_id');
@@ -22,10 +20,11 @@ class CreateDetailNasabahsTable extends Migration
             $table->date('tanggal_lahir');
             $table->string('kontak');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
-            $table->enum('status_pernikahan', ['belum kawin', 'kawin', 'cerai hidup', 'cerai mati']);
-            $table->enum('pekerjaan', [0, 20, 50, 75, 100]);
-            $table->enum('gaji', [30, 50, 60, 80, 100]);
-            $table->enum('tanggungan', [20, 40, 60, 80, 100]);
+            $table->enum('status_pernikahan', [1, 2]);
+            $table->enum('pekerjaan', [1, 2]);
+            $table->enum('gaji', [3, 2, 1]);
+            $table->enum('aset_rumah', [4, 3, 2, 1]);
+            $table->enum('aset_kendaraan', [4, 3, 2, 1]);
             $table->timestamps();
         });
     }
@@ -35,8 +34,7 @@ class CreateDetailNasabahsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('detail_nasabahs');
     }
 }

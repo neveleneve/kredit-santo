@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <nav class="navbar is-dark custom-shadow is-large py-2" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-link custom-shadow is-large py-2" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item has-text-weight-bold is-size-5" href="{{ route('landing-page') }}">

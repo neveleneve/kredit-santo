@@ -38,14 +38,17 @@
 
 <body>
     <div style="padding: 20px;">
-        <img src="{{ url('storage/images/llogo.png') }}" alt="Logo Perusahaan" width="150"
+        <img src="{{ url('storage/images/images.png') }}" alt="Logo Perusahaan" width="100"
             style="float: left; margin-right: 20px;">
         {{-- <div> --}}
         <h2 class="has-text-weight-bold" style="padding: 0px; margin: 0px; text-align: center">
-            CV Halifa Berkah Utama
+            PT Sinar Bahagia Group
         </h2>
-        <p style="text-align: center">Jalan Sei Payung</p>
-        <p style="text-align: center">WA/Telp : 081365558790. Email: berkah.utama2019@gmail.com</p>
+        <p style="text-align: center">
+            Jl. WR. Supratman No.1, Air Raja, Kec. Tanjungpinang Timur, Kota Tanjung Pinang,
+            Kepulauan Riau 29125
+        </p>
+        <p style="text-align: center">Telp : (0771) 41108.</p>
         {{-- </div> --}}
     </div>
     <hr>
@@ -97,7 +100,7 @@
                     <br>
                     <br>
                     <p class="indented-p has-text-weight-bold">
-                        Arief Rahman Hakim
+                        Riskandar
                     </p>
                 </div>
             </div>
@@ -106,14 +109,17 @@
 
     <div class="page-break">
         <div style="padding: 20px;">
-            <img src="{{ url('storage/images/llogo.png') }}" alt="Logo Perusahaan" width="150"
+            <img src="{{ url('storage/images/images.png') }}" alt="Logo Perusahaan" width="100"
                 style="float: left; margin-right: 20px;">
             {{-- <div> --}}
             <h2 class="has-text-weight-bold" style="padding: 0px; margin: 0px; text-align: center">
-                CV Halifa Berkah Utama
+                PT Sinar Bahagia
             </h2>
-            <p style="text-align: center">Jalan Sei Payung</p>
-            <p style="text-align: center">WA/Telp : 081365558790. Email: berkah.utama2019@gmail.com</p>
+            <p style="text-align: center">
+                Jl. WR. Supratman No.1, Air Raja, Kec. Tanjungpinang Timur, Kota Tanjung Pinang,
+                Kepulauan Riau 29125
+            </p>
+            <p style="text-align: center">Telp : (0771) 41108.</p>
             {{-- </div> --}}
         </div>
         <hr>

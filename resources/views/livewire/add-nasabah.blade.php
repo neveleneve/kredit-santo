@@ -48,19 +48,13 @@
                 <label class="label" for="kawin">Status Pernikahan <span class="has-text-danger">*</span></label>
                 <div class="control @error('kawin') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('kawin') is-danger @enderror">
-                        <select id="kawin" name="kawin" wire:model='statusnikah'>
+                        <select id="kawin" name="kawin">
                             <option value="">Pilih Status Pernikahan</option>
-                            <option value="belum kawin" {{ old('kawin') == 'belum kawin' ? 'selected' : null }}>
-                                Belum Kawin
+                            <option value="1" {{ old('kawin') == '1' ? 'selected' : null }}>
+                                Belum Menikah
                             </option>
-                            <option value="kawin" {{ old('kawin') == 'kawin' ? 'selected' : null }}>
-                                Kawin
-                            </option>
-                            <option value="cerai hidup" {{ old('kawin') == 'cerai hidup' ? 'selected' : null }}>
-                                Cerai Hidup
-                            </option>
-                            <option value="cerai mati" {{ old('kawin') == 'cerai mati' ? 'selected' : null }}>
-                                Cerai Mati
+                            <option value="2" {{ old('kawin') == '2' ? 'selected' : null }}>
+                                Menikah
                             </option>
                         </select>
                         @error('kawin')
@@ -264,18 +258,80 @@
     <div class="columns">
         <div class="column">
             <div class="field">
+                <label class="label" for="provinsi">Provinsi <span class="has-text-danger">*</span></label>
+                <div class="control @error('provinsi') has-icons-left @enderror">
+                    <div class="select is-fullwidth @error('provinsi') is-danger @enderror">
+                        <select id="provinsi" name="provinsi" wire:model='provinsi'>
+                            <option value="" hidden
+                                {{ old('provinsi') == '' || old('provinsi') == null ? 'selected' : null }}>
+                                Pilih Provinsi
+                            </option>
+                            @foreach ($dataprovinsi as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ old('provinsi') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('provinsi')
+                        <span class="icon is-small is-right has-text-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <span class="has-text-weight-bold has-text-danger">
+                            * {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="label" for="kotakab">Kota / Kabupaten <span class="has-text-danger">*</span></label>
+                <div class="control @error('kotakab') has-icons-left @enderror">
+                    <div class="select is-fullwidth  @error('kotakab') is-danger @enderror">
+                        <select id="kotakab" name="kotakab" wire:model='kotakab'
+                            {{ $provinsi == '' || $provinsi == null ? 'disabled' : null }}>
+                            <option value="" hidden
+                                {{ old('kotakab') == '' || old('kotakab') == null ? 'selected' : null }}>
+                                Pilih Kota / Kabupaten
+                            </option>
+                            @foreach ($datakotakab as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ old('kotakab') == $item->id ? 'selected' : null }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('kelurahan')
+                        <span class="icon is-small is-right has-text-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <span class="has-text-weight-bold has-text-danger">
+                            * {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="field">
                 <label class="label" for="kecamatan">Kecamatan <span class="has-text-danger">*</span></label>
                 <div class="control @error('kecamatan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('kecamatan') is-danger @enderror">
-                        <select id="kecamatan" name="kecamatan" wire:model='kecamatan'>
-                            <option value=""
+                        <select id="kecamatan" name="kecamatan" wire:model='kecamatan'
+                            {{ $kotakab == '' || $kotakab == null ? 'disabled' : null }}>
+                            <option value="" hidden
                                 {{ old('kecamatan') == '' || old('kecamatan') == null ? 'selected' : null }}>
                                 Pilih Kecamatan
                             </option>
                             @foreach ($datakecamatan as $item)
                                 <option value="{{ $item->id }}"
                                     {{ old('kecamatan') == $item->id ? 'selected' : null }}>
-                                    {{ $item->nama }}
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -298,14 +354,14 @@
                     <div class="select is-fullwidth  @error('kelurahan') is-danger @enderror">
                         <select id="kelurahan" name="kelurahan" wire:model='kelurahan'
                             {{ $kecamatan == '' || $kecamatan == null ? 'disabled' : null }}>
-                            <option value=""
+                            <option value="" hidden
                                 {{ old('kelurahan') == '' || old('kelurahan') == null ? 'selected' : null }}>
                                 Pilih Kelurahan
                             </option>
                             @foreach ($datakelurahan as $item)
                                 <option value="{{ $item->id }}"
                                     {{ old('kelurahan') == $item->id ? 'selected' : null }}>
-                                    {{ $item->nama }}
+                                    {{ $item->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -328,28 +384,20 @@
     <div class="columns">
         <div class="column">
             <div class="field">
-                <label class="label" for="pekerjaan">Pekerjaan <span class="has-text-danger">*</span></label>
+                <label class="label" for="pekerjaan">Status Pekerjaan <span class="has-text-danger">*</span></label>
                 <div class="control @error('pekerjaan') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('pekerjaan') is-danger @enderror">
                         {{-- jaminan (c4 wp) --}}
                         <select id="pekerjaan" name="pekerjaan">
-                            <option {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
-                                Pilih Pekerjaan
+                            <option value="" hidden
+                                {{ old('pekerjaan') == '' || old('pekerjaan') == null ? 'selected' : null }}>
+                                Pilih Status Pekerjaan
                             </option>
-                            <option value="100" {{ old('pekerjaan') == 100 ? 'selected' : null }}>
-                                Aparatur Sipil Negara / Tentara
+                            <option value="2" {{ old('pekerjaan') == 2 ? 'selected' : null }}>
+                                Tetap
                             </option>
-                            <option value="75" {{ old('pekerjaan') == 75 ? 'selected' : null }}>
-                                Pengusaha / Wiraswasta
-                            </option>
-                            <option value="50" {{ old('pekerjaan') == 50 ? 'selected' : null }}>
-                                Karyawan Swasta (Tetap)
-                            </option>
-                            <option value="20" {{ old('pekerjaan') == 20 ? 'selected' : null }}>
-                                Karyawan Swasta (Lepas)
-                            </option>
-                            <option value="0" {{ old('pekerjaan') == 0 ? 'selected' : null }}>
-                                Tidak Bekerja
+                            <option value="1" {{ old('pekerjaan') == 1 ? 'selected' : null }}>
+                                Tidak Tetap
                             </option>
                         </select>
                     </div>
@@ -372,23 +420,18 @@
                     <div class="select is-fullwidth @error('gaji') is-danger @enderror">
                         {{-- kemampuan (c3 wp) --}}
                         <select id="gaji" name="gaji">
-                            <option value="" {{ old('gaji') == '' || old('gaji') == null ? 'selected' : null }}>
+                            <option value="" hidden
+                                {{ old('gaji') == '' || old('gaji') == null ? 'selected' : null }}>
                                 Pilih Rentang Gaji / Pemasukan
                             </option>
-                            <option value="30" {{ old('gaji') == 30 ? 'selected' : null }}>
-                                Dibawah Rp 2.000.000
+                            <option value="3" {{ old('gaji') == 3 ? 'selected' : null }}>
+                                Rp 1.000.000 - Rp 3.000.000
                             </option>
-                            <option value="50" {{ old('gaji') == 50 ? 'selected' : null }}>
-                                Rp 2.000.000 - Rp 3.499.000
+                            <option value="2" {{ old('gaji') == 2 ? 'selected' : null }}>
+                                Diatas Rp 3.000.000 - Rp 7.000.000
                             </option>
-                            <option value="60" {{ old('gaji') == 60 ? 'selected' : null }}>
-                                Rp 3.500.000 - Rp 4.999.000
-                            </option>
-                            <option value="80" {{ old('gaji') == 80 ? 'selected' : null }}>
-                                Rp 5.000.000 - Rp 7.000.000
-                            </option>
-                            <option value="100" {{ old('gaji') == 100 ? 'selected' : null }}>
-                                Diatas Rp 7.000.000
+                            <option value="1" {{ old('gaji') == 1 ? 'selected' : null }}>
+                                Diatas Rp 7.000.000 - Rp 9.000.000
                             </option>
                         </select>
                     </div>
@@ -403,30 +446,74 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <hr>
+    <h3 class="has-text-weight-bold has-text-centered">Data Aset</h3>
+    <hr>
+    <div class="columns">
         <div class="column">
             <div class="field">
-                <label class="label" for="tanggungan">Jumlah Tanggungan <span
-                        class="has-text-danger">*</span></label>
-                <div class="control @error('tanggungan') has-icons-left @enderror">
-                    <div class="select is-fullwidth @error('tanggungan') is-danger @enderror">
-                        {{-- kondisi (c5 wp) --}}
-                        <select id="tanggungan" name="tanggungan">
-                            <option value=""
-                                {{ old('tanggungan') == '' || old('tanggungan') == null ? 'selected' : null }}>
-                                Pilih Jumlah Tanggungan
+                <label class="label" for="rumah">Kepemilikan Rumah <span class="has-text-danger">*</span></label>
+                <div class="control @error('rumah') has-icons-left @enderror">
+                    <div class="select is-fullwidth @error('rumah') is-danger @enderror">
+                        {{-- jaminan (c4 wp) --}}
+                        <select id="rumah" name="rumah">
+                            <option value="" hidden
+                                {{ old('rumah') == '' || old('rumah') == null ? 'selected' : null }}>
+                                Pilih Kepemilikan Rumah
                             </option>
-                            <option value="100" {{ old('tanggungan') == 100 ? 'selected' : null }}>
-                                Tidak ada tanggungan
+                            <option value="4" {{ old('rumah') == 4 ? 'selected' : null }}>
+                                Belum Punya
                             </option>
-                            <option value="80" {{ old('tanggungan') == 80 ? 'selected' : null }}>1 Orang</option>
-                            <option value="60" {{ old('tanggungan') == 60 ? 'selected' : null }}>2 Orang</option>
-                            <option value="40" {{ old('tanggungan') == 40 ? 'selected' : null }}>3 Orang</option>
-                            <option value="20" {{ old('tanggungan') == 20 ? 'selected' : null }}>
-                                Lebih dari 3 Orang
+                            <option value="3" {{ old('rumah') == 3 ? 'selected' : null }}>
+                                Mengontrak
+                            </option>
+                            <option value="2" {{ old('rumah') == 2 ? 'selected' : null }}>
+                                Punya Rumah
+                            </option>
+                            <option value="1" {{ old('rumah') == 1 ? 'selected' : null }}>
+                                Punya Rumah Lebih Dari 1
                             </option>
                         </select>
                     </div>
-                    @error('tanggungan')
+                    @error('rumah')
+                        <span class="icon is-small is-right has-text-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        <span class="has-text-weight-bold has-text-danger">
+                            * {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="label" for="kendaraan">Kepemilikan Kendaraan <span
+                        class="has-text-danger">*</span></label>
+                <div class="control @error('kendaraan') has-icons-left @enderror">
+                    <div class="select is-fullwidth @error('kendaraan') is-danger @enderror">
+                        <select id="kendaraan" name="kendaraan">
+                            <option value="" hidden
+                                {{ old('kendaraan') == '' || old('kendaraan') == null ? 'selected' : null }}>
+                                Pilih Kepemilikan Kendaraan
+                            </option>
+                            <option value="4" {{ old('kendaraan') == 4 ? 'selected' : null }}>
+                                Belum Punya
+                            </option>
+                            <option value="3" {{ old('kendaraan') == 3 ? 'selected' : null }}>
+                                Sepeda
+                            </option>
+                            <option value="2" {{ old('kendaraan') == 2 ? 'selected' : null }}>
+                                Sepeda Motor
+                            </option>
+                            <option value="1" {{ old('kendaraan') == 1 ? 'selected' : null }}>
+                                Mobil
+                            </option>
+                        </select>
+                    </div>
+                    @error('kendaraan')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
@@ -439,8 +526,7 @@
         </div>
     </div>
     <hr>
-    @if ($statusnikah == 'kawin' && $statusnikah != '')
-        {{-- data pasangan --}}
+    {{-- @if ($statusnikah == '2' && $statusnikah != '')
         <h3 class="has-text-weight-bold has-text-centered">Data Pasangan</h3>
         <hr>
         <div class="columns">
@@ -523,8 +609,7 @@
             </div>
         </div>
         <hr>
-    @elseif ($statusnikah != 'kawin' && $statusnikah != '')
-        {{-- data penjamin --}}
+    @elseif ($statusnikah != '2' && $statusnikah != '')
         <h3 class="has-text-weight-bold has-text-centered">Data Penjamin</h3>
         <hr>
         <div class="columns">
@@ -621,5 +706,5 @@
             </div>
         </div>
         <hr>
-    @endif
+    @endif --}}
 </div>
