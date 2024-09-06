@@ -38,7 +38,7 @@
 
 <body>
     <div style="padding: 20px;">
-        <img src="{{ url('storage/images/images.png') }}" alt="Logo Perusahaan" width="100"
+        <img src="{{ asset('logo/images.png') }}" alt="Logo Perusahaan" width="100"
             style="float: left; margin-right: 20px;">
         {{-- <div> --}}
         <h2 class="has-text-weight-bold is-size-3" style="padding: 0px; margin: 0px; text-align: center">
