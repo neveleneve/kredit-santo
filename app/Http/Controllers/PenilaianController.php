@@ -8,7 +8,7 @@ use App\Models\Penilaian;
 use App\Models\Rumah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class PenilaianController extends Controller {
     public function __construct() {
@@ -32,7 +32,6 @@ class PenilaianController extends Controller {
     }
 
     public function store(Request $request) {
-        // dd($request->all());
         $rumah = Rumah::with(
             'village',
             'village.district',
@@ -85,12 +84,9 @@ class PenilaianController extends Controller {
                 5 => $nasabah->detailNasabah->status_pernikahan,
             ];
             $nilaimfep = $this->hitungMFEP($datamfep);
-            $kombinasi = $nilaimfep;
-            // dd($kombinasi);
-            // dd([$nilaiwp, $nilaimfep, $kombinasi]);
-            // ubah sesuai dengan kebutuhan di dokumen 
+
             $status = '0';
-            if ($kombinasi >= 2) {
+            if ($nilaimfep >= 2) {
                 $rumah->update([
                     'status' => '0'
                 ]);
@@ -102,7 +98,6 @@ class PenilaianController extends Controller {
                 'dp' => $request->dp,
                 'tenor' => $request->tenor,
                 'bi_checking' => $request->bi,
-                // 'nilai_wp' => $nilaiwp,
                 'nilai' => $nilaimfep,
                 'status' => $status,
             ]);

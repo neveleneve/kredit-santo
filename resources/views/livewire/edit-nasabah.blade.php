@@ -270,7 +270,7 @@
                             @endforeach
                         </select>
                     </div>
-                    @error('kelurahan')
+                    @error('kotakab')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
@@ -477,11 +477,11 @@
                                 {{ $datanasabah->detailNasabah->aset_kendaraan == 3 ? 'selected' : null }}>
                                 Sepeda
                             </option>
-                            <option value="2" 
+                            <option value="2"
                                 {{ $datanasabah->detailNasabah->aset_kendaraan == 2 ? 'selected' : null }}>
                                 Sepeda Motor
                             </option>
-                            <option value="1" 
+                            <option value="1"
                                 {{ $datanasabah->detailNasabah->aset_kendaraan == 1 ? 'selected' : null }}>
                                 Mobil
                             </option>

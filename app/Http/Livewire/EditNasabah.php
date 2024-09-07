@@ -25,7 +25,6 @@ class EditNasabah extends Component {
 
     public $tanggallahir;
     public $usia;
-    public $cond;
 
     public function render() {
         return view('livewire.edit-nasabah');

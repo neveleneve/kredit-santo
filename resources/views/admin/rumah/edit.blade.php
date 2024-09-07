@@ -98,6 +98,7 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @livewire('rumah-edit', ['rumah_id' => $rumah->id])
                                 <div class="field">
                                     <label for="detail" class="label has-text-weight-bold">Detail Rumah</label>
                                     <div class="control">

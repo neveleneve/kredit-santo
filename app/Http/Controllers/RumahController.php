@@ -6,15 +6,12 @@ use App\Models\Rumah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RumahController extends Controller
-{
-    public function __construct()
-    {
+class RumahController extends Controller {
+    public function __construct() {
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
         $rumah = Rumah::paginate(10);
         return view('admin.rumah.index', [
             'rumah' => $rumah
@@ -22,20 +19,20 @@ class RumahController extends Controller
     }
 
 
-    public function create()
-    {
+    public function create() {
         return view('admin.rumah.create');
     }
 
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        // dd($request->all());
         $validasi = Validator::make($request->all(), [
             'nama' => ['required'],
             'tipe' => ['required', 'numeric'],
             'tanah' => ['required', 'numeric'],
             'harga' => ['required', 'numeric'],
             'detail' => ['required'],
+            'kelurahan' => ['required'],
         ], [
             'nama.required' => 'Nama atau lokasi rumah harus diisi!',
             'tipe.required' => 'Tipe rumah harus diisi!',
@@ -45,6 +42,7 @@ class RumahController extends Controller
             'harga.required' => 'Harga rumah harus diisi!',
             'harga.numeric' => 'Harga rumah harus diisi dengan angka!',
             'detail.required' => 'Detail rumah harus diisi!',
+            'kelurahan.required' => 'Lokasi kelurahan rumah harus diisi!',
         ]);
 
         if ($validasi->fails()) {
@@ -58,6 +56,7 @@ class RumahController extends Controller
                 'tipe_rumah' => $request->tipe . '/' . $request->tanah,
                 'harga' => $request->harga,
                 'detail' => $request->detail,
+                'village_id' => $request->kelurahan,
             ]);
             if ($rumah) {
                 return redirect(route('rumah.index'))->with([
@@ -73,15 +72,13 @@ class RumahController extends Controller
         }
     }
 
-    public function edit(Rumah $rumah)
-    {
+    public function edit(Rumah $rumah) {
         return view('admin.rumah.edit', [
             'rumah' => $rumah
         ]);
     }
 
-    public function update(Request $request, Rumah $rumah)
-    {
+    public function update(Request $request, Rumah $rumah) {
         $validasi = Validator::make($request->all(), [
             'nama' => ['required'],
             'tipe' => ['required', 'numeric'],
@@ -124,8 +121,7 @@ class RumahController extends Controller
         }
     }
 
-    public function destroy(Rumah $rumah)
-    {
+    public function destroy(Rumah $rumah) {
         $rumah->delete();
         if ($rumah) {
             return redirect(route('rumah.index'))->with([

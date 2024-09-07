@@ -304,7 +304,7 @@
                             @endforeach
                         </select>
                     </div>
-                    @error('kelurahan')
+                    @error('kotakab')
                         <span class="icon is-small is-right has-text-danger">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>

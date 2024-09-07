@@ -86,6 +86,7 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @livewire('rumah-create')
                                 <div class="field">
                                     <label for="detail" class="label has-text-weight-bold">Deskripsi Rumah</label>
                                     <div class="control">
