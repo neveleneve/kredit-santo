@@ -28,7 +28,7 @@
                                     <td>{{ $item->bobot }}</td>
                                     {{-- <td>{{ $item->tipe }}</td> --}}
                                     <td class="has-text-centered">
-                                        <a class="button is-primary is-small has-text-weight-bold"
+                                        <a class="button is-primary is-small is-outlined has-text-weight-bold"
                                             href="{{ route('kriteria-bobot.edit', ['kriteria_bobot' => $item->id]) }}">
                                             Lihat
                                         </a>

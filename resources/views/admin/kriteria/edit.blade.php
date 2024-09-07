@@ -51,7 +51,7 @@
                                 @endif
                                 <div class="columns">
                                     <div class="column is-6-desktop is-12-mobile">
-                                        <a class="button is-danger is-fullwidth has-text-weight-bold"
+                                        <a class="button is-danger is-fullwidth is-outlined has-text-weight-bold"
                                             href="{{ route('kriteria-bobot.index') }}">
                                             <i class="fa fa-chevron-left"></i>
                                             &nbsp;
@@ -59,7 +59,8 @@
                                         </a>
                                     </div>
                                     <div class="column is-6-desktop is-12-mobile">
-                                        <button type="submit" class="button is-info is-fullwidth has-text-weight-bold">
+                                        <button type="submit"
+                                            class="button is-info is-fullwidth is-outlined has-text-weight-bold">
                                             <i class="fa fa-save"></i>
                                             &nbsp;
                                             Update

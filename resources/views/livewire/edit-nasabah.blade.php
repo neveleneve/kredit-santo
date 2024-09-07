@@ -50,12 +50,14 @@
                 <label class="label" for="kawin">Status Pernikahan <span class="has-text-danger">*</span></label>
                 <div class="control @error('kawin') has-icons-left @enderror">
                     <div class="select is-fullwidth @error('kawin') is-danger @enderror">
-                        <select id="kawin" name="kawin" wire:model='statusnikah'>
-                            <option value="">Pilih Status Pernikahan</option>
-                            <option value="1" {{ old('kawin') == '1' ? 'selected' : null }}>
+                        <select id="kawin" name="kawin">
+                            <option value="" hidden>Pilih Status Pernikahan</option>
+                            <option value="1"
+                                {{ $datanasabah->detailNasabah->status_pernikahan == 1 ? 'selected' : null }}>
                                 Belum Menikah
                             </option>
-                            <option value="2" {{ old('kawin') == '2' ? 'selected' : null }}>
+                            <option value="2"
+                                {{ $datanasabah->detailNasabah->status_pernikahan == 2 ? 'selected' : null }}>
                                 Menikah
                             </option>
                         </select>
@@ -67,6 +69,7 @@
                                 * {{ $message }}
                             </span>
                         @enderror
+
                     </div>
                 </div>
             </div>

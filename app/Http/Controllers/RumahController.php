@@ -32,7 +32,7 @@ class RumahController extends Controller {
             'tanah' => ['required', 'numeric'],
             'harga' => ['required', 'numeric'],
             'detail' => ['required'],
-            'kelurahan' => ['required'],
+            'kelurahan' => ['required', 'numeric'],
         ], [
             'nama.required' => 'Nama atau lokasi rumah harus diisi!',
             'tipe.required' => 'Tipe rumah harus diisi!',
@@ -43,6 +43,7 @@ class RumahController extends Controller {
             'harga.numeric' => 'Harga rumah harus diisi dengan angka!',
             'detail.required' => 'Detail rumah harus diisi!',
             'kelurahan.required' => 'Lokasi kelurahan rumah harus diisi!',
+            'kelurahan.numeric' => 'Lokasi kelurahan rumah harus diisi dengan angka!',
         ]);
 
         if ($validasi->fails()) {
@@ -85,6 +86,7 @@ class RumahController extends Controller {
             'tanah' => ['required', 'numeric'],
             'harga' => ['required', 'numeric'],
             'detail' => ['required'],
+            'kelurahan' => ['required', 'numeric'],
         ], [
             'nama.required' => 'Nama atau lokasi rumah harus diisi!',
             'tipe.required' => 'Tipe rumah harus diisi!',
@@ -94,6 +96,8 @@ class RumahController extends Controller {
             'harga.required' => 'Harga rumah harus diisi!',
             'harga.numeric' => 'Harga rumah harus diisi dengan angka!',
             'detail.required' => 'Detail rumah harus diisi!',
+            'kelurahan.required' => 'Lokasi kelurahan rumah harus diisi!',
+            'kelurahan.numeric' => 'Lokasi kelurahan rumah harus diisi dengan angka!',
         ]);
 
         if ($validasi->fails()) {
@@ -106,6 +110,7 @@ class RumahController extends Controller {
                 'tipe_rumah' => $request->tipe . '/' . $request->tanah,
                 'harga' => $request->harga,
                 'detail' => $request->detail,
+                'village_id' => $request->kelurahan,
             ]);
             if ($rumah) {
                 return redirect(route('rumah.index'))->with([

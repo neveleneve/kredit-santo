@@ -264,11 +264,16 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    @if ($total != $penilaian->nilai)
+                                        <span class="has-text-danger">*</span>
+                                        <span class="has-text-weight-bold">Nilai Skor dengan total nilai total pada tabel
+                                            mengalami perubahan. Silakan mengulangi proses penilaian Nasabah</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    <a class="button is-danger is-fullwidth has-text-weight-bold"
+                                    <a class="button is-danger is-fullwidth is-outlined has-text-weight-bold"
                                         href="{{ route('penilaian.index') }}">
                                         <i class="fa fa-chevron-left"></i>
                                         &nbsp;

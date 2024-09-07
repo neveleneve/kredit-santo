@@ -1,7 +1,8 @@
 <div class="container">
     <div class="columns my-0">
         <div class="column my-0">
-            <a href="{{ route('nasabah.create') }}" class="button is-primary is-fullwidth has-text-weight-bold is-small">
+            <a href="{{ route('nasabah.create') }}"
+                class="button is-primary is-fullwidth is-outlined has-text-weight-bold is-small">
                 Tambah Data Nasabah
             </a>
         </div>
@@ -39,11 +40,12 @@
                                 <form action="{{ route('nasabah.destroy', ['nasabah' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="button is-primary is-small has-text-weight-bold"
+                                    <a class="button is-primary is-small is-outlined has-text-weight-bold"
                                         href="{{ route('nasabah.edit', ['nasabah' => $item->id]) }}">
                                         Edit
                                     </a>
-                                    <button type="submit" class="button is-danger is-small has-text-weight-bold"
+                                    <button type="submit"
+                                        class="button is-danger is-small is-outlined has-text-weight-bold"
                                         onclick="return confirm('Hapus data nasabah {{ $item->nama }}?')">
                                         Hapus
                                     </button>

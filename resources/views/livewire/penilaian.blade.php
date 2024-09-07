@@ -2,13 +2,13 @@
     <div class="columns my-0">
         <div class="column my-0">
             <a href="{{ route('penilaian.create') }}"
-                class="button is-primary is-fullwidth has-text-weight-bold is-small">
+                class="button is-primary is-fullwidth is-outlined has-text-weight-bold is-small">
                 Tambah Data Penilaian
             </a>
         </div>
         <div class="column my-0">
             <button data-target="modal" aria-haspopup="true" id="modalCetakButton"
-                class="button is-info is-fullwidth has-text-weight-bold is-small modal-button">
+                class="button is-info is-fullwidth is-outlined has-text-weight-bold is-small modal-button">
                 Cetak Data Penilaian
             </button>
             <div class="modal" id="modalCetak" wire:ignore>
@@ -53,7 +53,7 @@
                             </div>
                         </section>
                         <footer class="modal-card-foot">
-                            <button type="submit" class="button is-success">Cetak</button>
+                            <button type="submit" class="button is-success is-outlined">Cetak</button>
                         </footer>
                     </div>
                 </form>
@@ -92,12 +92,12 @@
                             </td>
                             <td>{{ $item->status ? 'Lolos Kelayakan' : 'Tidak Lolos Kelayakan' }}</td>
                             <td class="has-text-centered">
-                                <a class="button is-warning is-small has-text-weight-bold"
+                                <a class="button is-warning is-small is-outlined has-text-weight-bold"
                                     href="{{ route('penilaian.show', ['penilaian' => $item->id]) }}">
                                     Lihat
                                 </a>
                                 <a href="{{ route('penilaian.cetak', ['id' => $item->id]) }}" target="__blank"
-                                    class="button is-info is-small has-text-weight-bold">
+                                    class="button is-info is-small is-outlined has-text-weight-bold">
                                     Cetak
                                 </a>
                             </td>

@@ -41,6 +41,8 @@ class NasabahController extends Controller {
             'usia' => ['required', 'gte:21'],
             'kontak' => ['required', 'numeric'],
             'alamat' => ['required'],
+            'provinsi' => ['required', 'numeric'],
+            'kotakab' => ['required', 'numeric'],
             'kecamatan' => ['required', 'numeric'],
             'kelurahan' => ['required', 'numeric'],
             'pekerjaan' => ['required', 'numeric'],
@@ -73,6 +75,10 @@ class NasabahController extends Controller {
             'kontak.required' => 'Kontak nasabah harus diisi!',
             'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
             'alamat.required' => 'Alamat nasabah harus diisi!',
+            'provinsi.required' => 'Provinsi harus dipilih!',
+            'provinsi.numeric' => 'Provinsi harus diisi dengan angka!',
+            'kotakab.required' => 'Kota/Kabupaten harus dipilih!',
+            'kotakab.numeric' => 'Kota/Kabupaten harus diisi dengan angka!',
             'kecamatan.required' => 'Kecamatan harus dipilih!',
             'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
             'kelurahan.required' => 'Kelurahan harus dipilih!',
@@ -135,13 +141,11 @@ class NasabahController extends Controller {
 
 
     public function update(Request $request, Nasabah $nasabah) {
-        // dd([$request->all(), $nasabah]);
-        $validasi = null;
         $validasi = Validator::make($request->all(), [
             'nama' => ['required'],
             'kelamin' => ['required'],
             'kawin' => ['required'],
-            'nik' => ['required', 'digits:16', 'unique:detail_nasabahs,nik'],
+            'nik' => ['required', 'digits:16'],
             'no_kk' => ['required', 'digits:16'],
             'tempat_lahir' => ['required'],
             'tanggal_lahir' => ['required', 'date'],
@@ -149,6 +153,8 @@ class NasabahController extends Controller {
             'kontak' => ['required', 'numeric'],
             'alamat' => ['required'],
             'kecamatan' => ['required', 'numeric'],
+            'provinsi' => ['required', 'numeric'],
+            'kotakab' => ['required', 'numeric'],
             'kelurahan' => ['required', 'numeric'],
             'pekerjaan' => ['required', 'numeric'],
             'gaji' => ['required', 'numeric'],
@@ -161,7 +167,6 @@ class NasabahController extends Controller {
             'kawin.required' => 'Status kawin nasabah harus dipilih!',
             'nik.required' => 'NIK nasabah harus diisi!',
             'nik.digits' => 'Jumlah angka NIK nasabah harus 16 digit!',
-            'nik.unique' => 'NIK nasabah sudah terdaftar!',
             'no_kk.required' => 'Nomor KK nasabah harus diisi!',
             'no_kk.digits' => 'Jumlah angka Nomor KK nasabah harus 16 digit!',
             'tempat_lahir.required' => 'Tempat lahir nasabah harus diisi!',
@@ -172,6 +177,10 @@ class NasabahController extends Controller {
             'kontak.required' => 'Kontak nasabah harus diisi!',
             'kontak.numeric' => 'Kontak nasabah harus diisi dengan angka!',
             'alamat.required' => 'Alamat nasabah harus diisi!',
+            'provinsi.required' => 'Provinsi harus dipilih!',
+            'provinsi.numeric' => 'Provinsi harus diisi dengan angka!',
+            'kotakab.required' => 'Kota/Kabupaten harus dipilih!',
+            'kotakab.numeric' => 'Kota/Kabupaten harus diisi dengan angka!',
             'kecamatan.required' => 'Kecamatan harus dipilih!',
             'kecamatan.numeric' => 'Kecamatan harus diisi dengan angka!',
             'kelurahan.required' => 'Kelurahan harus dipilih!',
@@ -213,7 +222,7 @@ class NasabahController extends Controller {
 
             return redirect(route('nasabah.index'))->with([
                 'color' => 'success',
-                'message' => 'Berhasil menambah data nasabah!',
+                'message' => 'Berhasil memperbarui data nasabah!',
             ]);
         }
     }

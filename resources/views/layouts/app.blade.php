@@ -24,7 +24,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item has-text-weight-bold is-size-5" href="{{ route('landing-page') }}">
-                    Kredit Rumah
+                    {{ env('APP_NAME') }}
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                     data-target="navbarBasicExample">
@@ -39,12 +39,14 @@
                         <div class="navbar-item">
                             <div class="buttons">
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="button is-primary">
+                                    <a href="{{ route('register') }}"
+                                        class="button is-dark is-outlined is-small has-text-weight-bold">
                                         <strong>Sign up</strong>
                                     </a>
                                 @endif
                                 @if (Route::has('login'))
-                                    <a href="{{ route('login') }}" class="button is-success is-small has-text-weight-bold">
+                                    <a href="{{ route('login') }}"
+                                        class="button is-light is-outlined is-small has-text-weight-bold">
                                         Log in
                                     </a>
                                 @endif

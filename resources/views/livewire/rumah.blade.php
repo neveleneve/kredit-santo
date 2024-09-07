@@ -1,7 +1,8 @@
 <div class="container">
     <div class="columns my-0">
         <div class="column is-4-desktop is-12-mobile my-0">
-            <a class="button is-primary is-fullwidth has-text-weight-bold is-small" href="{{ route('rumah.create') }}">
+            <a class="button is-primary is-fullwidth has-text-weight-bold is-small is-outlined"
+                href="{{ route('rumah.create') }}">
                 Tambah Data Rumah
             </a>
         </div>
@@ -50,11 +51,12 @@
                                     <form action="{{ route('rumah.destroy', ['rumah' => $item->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a class="button is-info is-small has-text-weight-bold"
+                                        <a class="button is-info is-small is-outlined has-text-weight-bold"
                                             href="{{ route('rumah.edit', ['rumah' => $item->id]) }}">
                                             Edit
                                         </a>
-                                        <button type="submit" class="button is-danger is-small has-text-weight-bold"
+                                        <button type="submit"
+                                            class="button is-danger is-small is-outlined has-text-weight-bold"
                                             onclick="return confirm('Hapus data rumah \'{{ $item->rumah_code }}\'?')">
                                             Hapus
                                         </button>

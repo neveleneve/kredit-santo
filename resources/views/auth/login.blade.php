@@ -55,7 +55,7 @@
 
                                     <div class="field">
                                         <div class="control">
-                                            <button class="button is-primary is-fullwidth has-text-weight-bold">
+                                            <button class="button is-dark is-outlined is-fullwidth has-text-weight-bold">
                                                 Login
                                             </button>
                                         </div>

@@ -73,8 +73,14 @@
                                 <td>:</td>
                                 <td>{{ $penilaian->nasabah->detailNasabah->kontak }}</td>
                             </tr>
+                            <tr>
+                                <td class="has-text-weight-bold">Skor Akhir</td>
+                                <td>:</td>
+                                <td>{{ $penilaian->nilai }}</td>
+                            </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
             <div class="columns">
@@ -166,6 +172,11 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        @if ($total != $penilaian->nilai)
+                            <span class="has-text-danger">*</span>
+                            <span class="has-text-weight-bold is-size-7">Nilai Skor dengan total nilai total pada tabel
+                                mengalami perubahan. Silakan mengulangi proses penilaian Nasabah</span>
+                        @endif
                     </div>
                 </div>
             </div>
