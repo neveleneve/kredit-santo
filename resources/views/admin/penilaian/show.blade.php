@@ -218,7 +218,7 @@
                             <hr>
                             <div class="columns">
                                 <div class="column">
-                                    <h3 class="has-text-weight-bold has-text-centered">Data Penilaian Nasabah</h3>
+                                    <h3 class="has-text-weight-bold has-text-centered">Data Detail Penilaian Nasabah</h3>
                                     <hr>
                                 </div>
                             </div>
