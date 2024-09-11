@@ -258,16 +258,18 @@
                                                     Nilai Total
                                                 </td>
                                                 <td>
-
                                                     {{ $total }}
                                                 </td>
                                             </tr>
                                         </tfoot>
                                     </table>
-                                    @if ($total != $penilaian->nilai)
+                                    @if (round($total, 2) !== round($penilaian->nilai, 2))
                                         <span class="has-text-danger">*</span>
                                         <span class="has-text-weight-bold">Nilai Skor dengan total nilai total pada tabel
                                             mengalami perubahan. Silakan mengulangi proses penilaian Nasabah</span>
+                                        {{-- <br>
+                                        <span class="has-text-weight-bold">Total perhitungan : {{ round($total, 2) }} -
+                                            Penilaian pada Database : {{ round($penilaian->nilai, 2) }} </span> --}}
                                     @endif
                                 </div>
                             </div>
